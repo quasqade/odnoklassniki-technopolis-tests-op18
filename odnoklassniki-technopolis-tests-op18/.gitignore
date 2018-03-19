@@ -1,0 +1,17 @@
+/target
+.DS_Store
+/test-output
+/.project
+*.project
+/.idea/*
+/.classpath
+/.settings
+/.iml
+*.ipr
+*.iws
+*.iml
+*.png
+/*.png
+/bin
+/chromedriver.log
+/*.log
