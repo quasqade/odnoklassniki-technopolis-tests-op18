@@ -1,7 +1,6 @@
 package core.wrappers.feed;
 
 import core.factories.FeedPostFactory;
-import core.transformers.FeedPostListTransformer;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
@@ -10,7 +9,7 @@ import org.openqa.selenium.WebElement;
  */
 public class FeedPostGroup extends AbstractFeedPost {
 
-  public FeedPostGroup(WebElement rootElement){
+  public FeedPostGroup(WebElement rootElement) {
     super(rootElement);
   }
 

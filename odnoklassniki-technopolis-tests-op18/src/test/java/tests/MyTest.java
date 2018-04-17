@@ -1,16 +1,20 @@
 package tests;
 
-import java.util.regex.Pattern;
+import static org.junit.Assert.fail;
+
 import java.util.concurrent.TimeUnit;
-import org.junit.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-import org.openqa.selenium.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class MyTest {
+
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
@@ -36,7 +40,8 @@ public class MyTest {
     driver.findElement(By.id("field_password")).sendKeys("59pckgkC259C");
     driver.findElement(By.cssSelector("div.form-actions > div > input.button-pro.__wide")).click();
     driver.findElement(By.xpath(".//*[contains(@hrefattrs,'NavMenu_User_AltGroups')]")).click();
-    driver.findElement(By.xpath(".//*[contains(@href,'st.layer.cmd=PopLayerCreateAltGroup')]")).click();
+    driver.findElement(By.xpath(".//*[contains(@href,'st.layer.cmd=PopLayerCreateAltGroup')]"))
+        .click();
     driver.findElement(By.xpath(".//*[contains(@data-l ,'PAGE')]")).click();
     driver.findElement(By.id("field_name")).clear();
     driver.findElement(By.id("field_name")).sendKeys("MyTest");

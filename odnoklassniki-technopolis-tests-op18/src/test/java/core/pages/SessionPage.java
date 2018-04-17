@@ -8,7 +8,6 @@ public class SessionPage extends PageBase {
 
   /**
    * Представляет страницу логина
-   * @param driver
    */
   public SessionPage(WebDriver driver) {
     super(driver);
@@ -20,11 +19,12 @@ public class SessionPage extends PageBase {
 
   /**
    * Логинится от имени пользователя
+   *
    * @param testBot параметры входа
    */
   public void loginAuth(TestBot testBot) {
-      type(testBot.getLogin(), By.id("field_email"));
-      type(testBot.getPassword(), By.id("field_password"));
-      click(By.xpath(".//input[contains(@data-l,'sign_in')]"));
+    type(testBot.getLogin(), By.id("field_email"));
+    type(testBot.getPassword(), By.id("field_password"));
+    click(By.xpath(".//input[contains(@data-l,'sign_in')]"));
   }
 }

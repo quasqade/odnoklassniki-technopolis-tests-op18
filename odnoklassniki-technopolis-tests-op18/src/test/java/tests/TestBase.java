@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public abstract class TestBase {
+
   protected String baseUrl;
   protected WebDriver driver;
   private StringBuffer verificationErrors = new StringBuffer();
@@ -34,7 +35,7 @@ public abstract class TestBase {
     driver.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
-        fail(verificationErrorString);
+      fail(verificationErrorString);
     }
   }
 }

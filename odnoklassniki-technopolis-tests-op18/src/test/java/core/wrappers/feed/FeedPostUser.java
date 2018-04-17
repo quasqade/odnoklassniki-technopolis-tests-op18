@@ -1,7 +1,6 @@
 package core.wrappers.feed;
 
 import core.factories.FeedPostFactory;
-import core.transformers.FeedPostListTransformer;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
@@ -10,7 +9,7 @@ import org.openqa.selenium.WebElement;
  */
 public class FeedPostUser extends AbstractFeedPost {
 
-  public FeedPostUser(WebElement rootElement){
+  public FeedPostUser(WebElement rootElement) {
     super(rootElement);
   }
 
@@ -19,8 +18,7 @@ public class FeedPostUser extends AbstractFeedPost {
     try {
       WebElement titleElement = rootElement.findElement(FeedPostFactory.POST_AUTHOR_USER);
       return titleElement.getText();
-    }
-    catch (NoSuchElementException nse){
+    } catch (NoSuchElementException nse) {
       return "Can't get author for feed post";
     }
 

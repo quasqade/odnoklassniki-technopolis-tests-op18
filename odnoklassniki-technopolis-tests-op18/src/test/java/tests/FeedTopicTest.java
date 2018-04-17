@@ -1,13 +1,12 @@
 package tests;
 
-import core.pages.groups.GroupMainPage;
 import core.pages.SessionPage;
 import core.pages.UserGroupsPage;
 import core.pages.UserMainPage;
+import core.pages.groups.GroupMainPage;
 import core.wrappers.feed.AbstractFeedPost;
 import model.TestBot;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -16,7 +15,7 @@ import org.junit.Test;
 public class FeedTopicTest extends TestBase {
 
   @Override
-  public void setUp() throws Exception{
+  public void setUp() throws Exception {
     super.setUp();
     new SessionPage(driver).loginAuth(new TestBot("QA18testbot78", "QA18testbot"));
     new UserMainPage(driver).openGroupsByToolbar();

@@ -48,6 +48,7 @@ public class GroupSettingsPage extends PageBase {
 
   /**
    * Выбирает в списке типов группы (не страницы) тип, отвечающий за доступ
+   *
    * @param type тип группы
    */
   public void changePrivacy(GroupPrivacy type) {
@@ -95,6 +96,7 @@ public class GroupSettingsPage extends PageBase {
 
   /**
    * Возвращает текст последнего всплывающего уведомления
+   *
    * @return текст уведомления
    */
   public String getLastTipText() {

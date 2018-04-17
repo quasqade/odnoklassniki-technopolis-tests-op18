@@ -1,14 +1,13 @@
 package tests;
 
-import core.pages.groups.GroupMainPage;
 import core.pages.SessionPage;
 import core.pages.UserGroupsPage;
 import core.pages.UserMainPage;
-import core.pages.groups.GroupSettingsPage;
+import core.pages.groups.GroupMainPage;
 import core.pages.groups.GroupPrivacy;
+import core.pages.groups.GroupSettingsPage;
 import model.TestBot;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -17,7 +16,7 @@ import org.junit.Test;
 public class PrivateGroupJoinTest extends TestBase {
 
   @Override
-  public void setUp() throws Exception{
+  public void setUp() throws Exception {
     super.setUp();
     new SessionPage(driver).loginAuth(new TestBot("QA18testbot78", "QA18testbot"));
     new UserMainPage(driver).openGroupsByToolbar();
@@ -36,7 +35,8 @@ public class PrivateGroupJoinTest extends TestBase {
     //test
     GroupMainPage groupMainPage = new GroupMainPage(driver);
     groupMainPage.openOtherSections();
-    Assert.assertTrue("Выпадающее меню не появилось после нажатия Ещё", groupMainPage.checkIfOtherSectionsIsOpen());
+    Assert.assertTrue("Выпадающее меню не появилось после нажатия Ещё",
+        groupMainPage.checkIfOtherSectionsIsOpen());
     groupMainPage.openGroupSettings();
     GroupSettingsPage gsp = new GroupSettingsPage(driver);
     gsp.changeType();
@@ -44,7 +44,6 @@ public class PrivateGroupJoinTest extends TestBase {
     gsp.changePrivacy(GroupPrivacy.PRIVATE);
     gsp.confirmSettings();
     Assert.assertEquals("Настройки сохранены", gsp.getLastTipText());
-
 
     //conditions
 

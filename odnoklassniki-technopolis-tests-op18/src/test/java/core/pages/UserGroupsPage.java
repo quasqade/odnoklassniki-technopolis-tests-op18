@@ -9,28 +9,29 @@ import org.openqa.selenium.support.ui.Select;
  */
 public class UserGroupsPage extends PageBase {
 
-  private static final By CATEGORY_DROPDOWN = By.xpath("//select[contains(@id, 'pageMixedCategory')]");
+  private static final By CATEGORY_DROPDOWN = By
+      .xpath("//select[contains(@id, 'pageMixedCategory')]");
   private static final By CATEGORY_PUBLIC_PAGE = By.xpath(".//*[contains(@data-l,'PAGE')]");
   private static final By CATEGORY_PUBLIC_GROUP = By.xpath(".//*[contains(@data-l, 'INTEREST')]");
 
-  public UserGroupsPage(WebDriver driver)
-  {
+  public UserGroupsPage(WebDriver driver) {
     super(driver);
   }
 
   protected void check() {
-  //TODO
+    //TODO
   }
 
   /**
    * Подтверждает создание группы в попапе
    */
   public void confirmGroupCreation() {
-      click(By.id("hook_FormButton_button_create"));
+    click(By.id("hook_FormButton_button_create"));
   }
 
   /**
    * Вводит имя группы в поле в попапе
+   *
    * @param name имя группы
    */
   public void inputGroupName(String name) {
@@ -47,7 +48,7 @@ public class UserGroupsPage extends PageBase {
   /**
    * Выбирает тип "группа по интересам"
    */
-  public void selectPublicGroup(){
+  public void selectPublicGroup() {
     click(CATEGORY_PUBLIC_GROUP);
   }
 
@@ -55,7 +56,7 @@ public class UserGroupsPage extends PageBase {
   /**
    * Выбирает категорию "Компьютеры и интернет"
    */
-  public void selectCategoryComputers(){
+  public void selectCategoryComputers() {
     Select select = new Select(driver.findElement(CATEGORY_DROPDOWN));
     select.selectByVisibleText("Компьютер и интернет");
   }

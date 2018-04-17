@@ -13,14 +13,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class UserMainPage extends PageBase {
 
-  private static final By FEED_CATEGORY_GROUPS = By.xpath("//*[contains(@data-l, 'feedTargetFilterId,205')]");
+  private static final By FEED_CATEGORY_GROUPS = By
+      .xpath("//*[contains(@data-l, 'feedTargetFilterId,205')]");
   private static final By FEED = By.xpath("//*[@class='feed-w']");
   private List<AbstractFeedPost> feedPosts;
 
 
   public UserMainPage(WebDriver driver) {
     super(driver);
-    new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class, 'nav-side')]")));
+    new WebDriverWait(driver, 10).until(ExpectedConditions
+        .visibilityOfElementLocated(By.xpath("//*[contains(@class, 'nav-side')]")));
   }
 
   protected void check() {
@@ -38,29 +40,33 @@ public class UserMainPage extends PageBase {
   /**
    * Выбирает вкладку "Группы" в ленте
    */
-  public void openGroupsFeedCategory(){
+  public void openGroupsFeedCategory() {
     click(FEED_CATEGORY_GROUPS);
-    new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class, 'stub-group')]")));
+    new WebDriverWait(driver, 10).until(ExpectedConditions
+        .visibilityOfElementLocated(By.xpath("//*[contains(@class, 'stub-group')]")));
   }
 
   /**
    * Определяет, есть ли на странице пост с таким текстом
+   *
    * @param s текст
-   * @return
    */
-  public boolean isTopicPresentInFeedByText(String s){
-    return isElementPresent(By.xpath("//*[contains(@class, 'media-text') and contains(text(), \'" + s + "\')]"));
+  public boolean isTopicPresentInFeedByText(String s) {
+    return isElementPresent(
+        By.xpath("//*[contains(@class, 'media-text') and contains(text(), \'" + s + "\')]"));
   }
 
   /**
    * Собирает список всех отображаемых на странице постов ленты
+   *
    * @return true - есть посты, false - нет
    */
-  public boolean collectFeedPosts(){
+  public boolean collectFeedPosts() {
     new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(FEED));
     List<AbstractFeedPost> feedPosts = FeedPostListTransformer.collectPosts(driver);
-    if (feedPosts.size()==0)
+    if (feedPosts.size() == 0) {
       return false;
+    }
 
     this.feedPosts = feedPosts;
     return true;
@@ -68,9 +74,10 @@ public class UserMainPage extends PageBase {
 
   /**
    * Возвращает первый пост из списка, собранного collectFeedPosts()
+   *
    * @return враппер поста
    */
-  public AbstractFeedPost getFirstPostInFeed(){
+  public AbstractFeedPost getFirstPostInFeed() {
     return feedPosts.get(0);
   }
 }

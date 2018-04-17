@@ -8,22 +8,26 @@ import org.openqa.selenium.WebElement;
  */
 public abstract class AbstractFeedPost {
 
-  enum FeedPostType{GROUP, USER};
+  enum FeedPostType {GROUP, USER}
+
+  ;
   protected WebElement rootElement;
   private static final By POST_TEXT = By.xpath("//*[contains(@class, 'textWrap')]");
 
-  public AbstractFeedPost(WebElement rootElement){
+  public AbstractFeedPost(WebElement rootElement) {
     this.rootElement = rootElement;
   }
 
   /**
    * Возвращает имя автора поста
+   *
    * @return текст имени
    */
   abstract public String getAuthor();
 
   /**
    * Возвращает тип поста
+   *
    * @return enum с типом поста
    */
   abstract public FeedPostType getType();
@@ -31,28 +35,28 @@ public abstract class AbstractFeedPost {
   /**
    * @return Число комментариев на посте
    */
-  public Integer getCommentsCounter(){
-return null;
+  public Integer getCommentsCounter() {
+    return null;
   }
 
   /**
    * @return число классов на посте
    */
-  public Integer getKlassCounter(){
+  public Integer getKlassCounter() {
     return null;
   }
 
   /**
    * @return Число шар на посте
    */
-  public Integer getShareCounter(){
+  public Integer getShareCounter() {
     return null;
   }
 
   /**
    * @return текст поста
    */
-  public String getText(){
+  public String getText() {
     return rootElement.findElement(POST_TEXT).getText();
   }
 
@@ -61,21 +65,21 @@ return null;
   /**
    * Открыть комменты на посте
    */
-  public void openComments(){
+  public void openComments() {
 
   }
 
   /**
    * Решарнуть пост
    */
-  public void reshare(){
+  public void reshare() {
 
   }
 
   /**
    * Поставить класс
    */
-  public void doKlass(){
+  public void doKlass() {
 
   }
 }
