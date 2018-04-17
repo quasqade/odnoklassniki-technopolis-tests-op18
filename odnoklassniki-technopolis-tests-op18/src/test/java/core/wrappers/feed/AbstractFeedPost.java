@@ -8,13 +8,11 @@ import org.openqa.selenium.WebElement;
  */
 public abstract class AbstractFeedPost {
 
-  enum FeedPostType {GROUP, USER}
-
-  ;
-  protected WebElement rootElement;
   private static final By POST_TEXT = By.xpath("//*[contains(@class, 'textWrap')]");
 
-  public AbstractFeedPost(WebElement rootElement) {
+
+  protected final WebElement rootElement;
+  protected AbstractFeedPost(WebElement rootElement) {
     this.rootElement = rootElement;
   }
 
@@ -60,14 +58,14 @@ public abstract class AbstractFeedPost {
     return rootElement.findElement(POST_TEXT).getText();
   }
 
-  //TODO заменить на промисы где будут
-
   /**
    * Открыть комменты на посте
    */
   public void openComments() {
 
   }
+
+  //TODO заменить на промисы где будут
 
   /**
    * Решарнуть пост
@@ -82,4 +80,6 @@ public abstract class AbstractFeedPost {
   public void doKlass() {
 
   }
+
+  enum FeedPostType {GROUP, USER}
 }

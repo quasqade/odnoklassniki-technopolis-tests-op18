@@ -1,12 +1,8 @@
 package core.pages.groups.settings;
 
-import core.pages.PageBase;
 import core.pages.groups.GroupPrivacy;
-import junit.framework.AssertionFailedError;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -28,7 +24,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
     super(driver);
   }
 
-    /**
+  /**
    * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
    */
   public void changeType() {

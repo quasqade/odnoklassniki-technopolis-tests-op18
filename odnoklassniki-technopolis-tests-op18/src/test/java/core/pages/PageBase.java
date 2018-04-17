@@ -16,18 +16,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class PageBase {
 
-  protected WebDriver driver;
+  protected final WebDriver driver;
   private boolean acceptNextAlert = true;
 
-  public PageBase(WebDriver driver) {
+  protected PageBase(WebDriver driver) {
     this.driver = driver;
     check();
   }
 
   protected abstract void check();
 
-  public void click(By xpath) {
-    if (!explicitWait(ExpectedConditions.elementToBeClickable(xpath), 5,500)){
+  protected void click(By xpath) {
+    if (!explicitWait(ExpectedConditions.elementToBeClickable(xpath), 5, 500)) {
       Assert.fail("Элемент не кликабелен: " + xpath);
     }
     driver.findElement(xpath).click();
@@ -75,7 +75,7 @@ public abstract class PageBase {
   /**
    * Ожидание
    */
-  public boolean explicitWait(final ExpectedCondition<?> condition, long maxCheckTimeInSeconds,
+  protected boolean explicitWait(final ExpectedCondition<?> condition, long maxCheckTimeInSeconds,
       long millisecondsBetweenChecks) {
     Preconditions.checkNotNull(condition, "Condition must be not null");
     Preconditions.checkArgument(TimeUnit.MINUTES.toSeconds(3) > maxCheckTimeInSeconds,

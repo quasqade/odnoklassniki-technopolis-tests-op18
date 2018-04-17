@@ -11,11 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Абстрактный родитель для всех страниц настроек группы
  */
-public abstract class AbstractSettingsPage extends PageBase{
+public abstract class AbstractSettingsPage extends PageBase {
+
   private static final By NAV_PANEL = By.xpath("//*[contains(@id, 'GroupSettingsCatalog')]");
   private static final By NAV_RIGHTS = By.xpath("//*[contains(@hrefattrs, 'GroupRights')]");
   private static final By SAVE_SETTINGS = By.xpath("//*[@name='button_save_settings']");
-  private static final By TIP = By.xpath("//*[@data-module='NonBlockingTip']//*[@class='tip_cnt']//*");
+  private static final By TIP = By
+      .xpath("//*[@data-module='NonBlockingTip']//*[@class='tip_cnt']//*");
   private String lastTipText = "NO TIP";
 
   public AbstractSettingsPage(WebDriver driver) {
@@ -66,9 +68,10 @@ public abstract class AbstractSettingsPage extends PageBase{
 
   /**
    * Переходит на страницу Управление через левую навигацию
+   *
    * @return страница Управление
    */
-  public RightsSettingsPage clickRights(){
+  public RightsSettingsPage clickRights() {
     click(NAV_RIGHTS);
     return new RightsSettingsPage(driver);
   }

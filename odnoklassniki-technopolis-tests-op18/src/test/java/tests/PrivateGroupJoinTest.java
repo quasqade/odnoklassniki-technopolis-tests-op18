@@ -10,7 +10,6 @@ import core.pages.groups.settings.RightsSettingsPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 /**
@@ -18,12 +17,12 @@ import org.testng.Assert;
  */
 public class PrivateGroupJoinTest extends TestBase {
 
+  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot79", "QA18testbot");
   private static final String GROUP_NAME = "PrivateJoinTestGroup";
   private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
-  public static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot79", "QA18testbot");
 
   @Before
-  public void preconditions(){
+  public void preconditions() {
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
     GroupHelper.createPublicPage(driver, GROUP_NAME);
   }
@@ -64,7 +63,7 @@ public class PrivateGroupJoinTest extends TestBase {
     Assert.assertTrue(gmp.getAmountOfPendingRequests() > 0);
     int members = gmp.getAmountOfMembers();
     gmp.acceptFirstJoinRequest();
-    Assert.assertEquals(gmp.getAmountOfMembers(), members+1);
+    Assert.assertEquals(gmp.getAmountOfMembers(), members + 1);
 
     //авторизация от второго пользователя
     stop();

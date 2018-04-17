@@ -8,30 +8,30 @@ import org.openqa.selenium.WebElement;
 
 public abstract class AbstractGroupCard {
 
-    protected WebElement rootElement;
+  protected WebElement rootElement;
 
-    public AbstractGroupCard(WebElement rootElement) {
-        this.rootElement = rootElement;
-    }
+  public AbstractGroupCard(WebElement rootElement) {
+    this.rootElement = rootElement;
+  }
 
-    /**
-     * Возвращает название группы
-     *
-     * @return текст имени
-     */
-    abstract public String getName();
+  /**
+   * Возвращает название группы
+   *
+   * @return текст имени
+   */
+  abstract public String getName();
 
-    /**
-     * Возвращает количество подписчиков
-     *
-     * @return текст имени
-     */
-    abstract public String getFollowersNumber();
+  /**
+   * Возвращает количество подписчиков
+   *
+   * @return текст имени
+   */
+  abstract public String getFollowersNumber();
 
 
-    /**
-     * Клик по карте
-     */
-    abstract public void clickToGroupCard();
+  /**
+   * Клик по карте
+   */
+  abstract public void clickToGroupCard();
 
 }

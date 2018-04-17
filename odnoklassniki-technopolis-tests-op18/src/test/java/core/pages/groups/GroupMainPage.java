@@ -31,11 +31,13 @@ public class GroupMainPage extends PageBase {
   private final static By DROPDOWN_SETTINGS = By
       .xpath("//*[contains(@hrefattrs, 'altGroupSettings')]");
   private final static By JOIN_BUTTON = By.xpath("//*[contains(@href, 'GroupJoin')]");
-  private final static By GROUP_CARD = By.xpath("//*[contains(@id, 'TopCardAltGroup')]");
-  private final static By GROUP_CARD_PENDING_JOIN = By.xpath("//*[contains(@class, 'dropdown') and contains(@class, 'disabled')]");
-  private final static By INVITATIONS_PANEL = By.xpath("//*[contains(@id, 'PossibleFriendsPanel')]");
+  private final static By GROUP_CARD_PENDING_JOIN = By
+      .xpath("//*[contains(@class, 'dropdown') and contains(@class, 'disabled')]");
+  private final static By INVITATIONS_PANEL = By
+      .xpath("//*[contains(@id, 'PossibleFriendsPanel')]");
   private final static By JOIN_REQUESTS_COUNTER = By.xpath("//*[@id='joinRequestsCount']");
-  private final static By ACCEPT_JOIN_REQUEST = By.xpath("//span[contains(@id, 'GroupJoinRequests')]");
+  private final static By ACCEPT_JOIN_REQUEST = By
+      .xpath("//span[contains(@id, 'GroupJoinRequests')]");
   private final static By MEMBER_COUNTER = By.xpath("//*[@id='membersCountEl']");
   private final static By MAIN_DROPDOWN = By.xpath("//*[contains(@class, 'primary-dropdown')]");
 
@@ -88,7 +90,7 @@ public class GroupMainPage extends PageBase {
     click(OTHER_SECTIONS);
     //проверяем, что меню открылось
     Assert.assertTrue("Выпадающее меню не появилось после нажатия Ещё",
-       checkIfOtherSectionsIsOpen());
+        checkIfOtherSectionsIsOpen());
   }
 
   /**
@@ -117,6 +119,7 @@ public class GroupMainPage extends PageBase {
 
   /**
    * Создает новый топик, проходя ввод текста в попапе и подтверждение
+   *
    * @param s текст топика
    */
   public void createNewTopic(String s) {
@@ -128,28 +131,28 @@ public class GroupMainPage extends PageBase {
   /**
    * Кликает присоединение к группе
    */
-  public void joinGroup(){
+  public void joinGroup() {
     click(JOIN_BUTTON);
   }
 
   /**
    * Проверяет, ожидается ли запрос на вступление в группу
    */
-  public boolean isInvitationPending(){
-      return explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_CARD_PENDING_JOIN),5,500);
+  public boolean isInvitationPending() {
+    return explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_CARD_PENDING_JOIN), 5,
+        500);
   }
 
   /**
    * Возвращает число запросов на вступление
+   *
    * @return число запросов
    */
-  public int getAmountOfPendingRequests(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(INVITATIONS_PANEL), 5, 500)){
+  public int getAmountOfPendingRequests() {
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(JOIN_REQUESTS_COUNTER), 5,
+        500)) {
       return 0;
     }
-    WebElement invitationsPanel = driver.findElement(INVITATIONS_PANEL);
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(JOIN_REQUESTS_COUNTER), 5, 500))
-      return 0;
 
     return Integer.parseInt(driver.findElement(JOIN_REQUESTS_COUNTER).getText());
   }
@@ -157,17 +160,18 @@ public class GroupMainPage extends PageBase {
   /**
    * Принимает первую заявку на вступление
    */
-  public void acceptFirstJoinRequest(){
+  public void acceptFirstJoinRequest() {
     click(ACCEPT_JOIN_REQUEST);
   }
 
   /**
    * Возвращает число участников, перед этим обновляя страницу чтобы счетчик был корректным
+   *
    * @return число участниоков, 0 если что-то пошло не так
    */
-  public int getAmountOfMembers(){
+  public int getAmountOfMembers() {
     driver.navigate().refresh();
-    if (explicitWait(ExpectedConditions.visibilityOfElementLocated(MEMBER_COUNTER), 5, 500)){
+    if (explicitWait(ExpectedConditions.visibilityOfElementLocated(MEMBER_COUNTER), 5, 500)) {
       return Integer.parseInt(driver.findElement(MEMBER_COUNTER).getText());
     }
     return 0;
@@ -175,9 +179,10 @@ public class GroupMainPage extends PageBase {
 
   /**
    * Проверяет, состоит ли участник в группе
+   *
    * @return false если нет
    */
-  public boolean isMember(){
+  public boolean isMember() {
     return explicitWait(ExpectedConditions.visibilityOfElementLocated(MAIN_DROPDOWN), 5, 500);
   }
 

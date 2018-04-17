@@ -2,7 +2,6 @@ package tests;
 
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
-import core.pages.UserGroupsPage;
 import core.pages.UserMainPage;
 import core.pages.groups.GroupMainPage;
 import core.wrappers.feed.AbstractFeedPost;
