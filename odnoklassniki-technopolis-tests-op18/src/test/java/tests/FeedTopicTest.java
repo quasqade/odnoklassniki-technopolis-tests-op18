@@ -16,9 +16,9 @@ import org.junit.Test;
  */
 public class FeedTopicTest extends TestBase {
 
-  public static final String GROUP_NAME = "AddTopicTestGroup";
-  public static final String TOPIC_TEXT = "Тест доставки ленты";
-  public static final TestBot USER_ACCOUNT = new TestBot("QA18testbot78", "QA18testbot");
+  private static final String GROUP_NAME = "AddTopicTestGroup";
+  private static final String TOPIC_TEXT = "Тест доставки ленты";
+  private static final TestBot USER_ACCOUNT = new TestBot("QA18testbot78", "QA18testbot");
 
   @Before
   public void preconditions() {
@@ -37,7 +37,7 @@ public class FeedTopicTest extends TestBase {
 
     //conditions
     Assert.assertTrue(userMainPage.collectFeedPosts()); //проверяем, что лента не пустая
-    AbstractFeedPost firstFeedPost = userMainPage.getFirstPostInFeed();
+    AbstractFeedPost firstFeedPost = userMainPage.getFirstPostInFeed(); //берем первый пост из ленты
     //проверяем, что пост соответствует ожиданиям
     Assert.assertEquals(GROUP_NAME, firstFeedPost.getAuthor());
     Assert.assertEquals(TOPIC_TEXT, firstFeedPost.getText());

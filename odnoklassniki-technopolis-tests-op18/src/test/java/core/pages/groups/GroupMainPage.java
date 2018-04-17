@@ -2,6 +2,8 @@ package core.pages.groups;
 
 import core.pages.PageBase;
 import core.pages.UserMainPage;
+import core.pages.groups.settings.GroupSettingsPage;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -75,6 +77,9 @@ public class GroupMainPage extends PageBase {
    */
   public void openOtherSections() {
     click(OTHER_SECTIONS);
+    //проверяем, что меню открылось
+    Assert.assertTrue("Выпадающее меню не появилось после нажатия Ещё",
+       checkIfOtherSectionsIsOpen());
   }
 
   /**
@@ -111,8 +116,4 @@ public class GroupMainPage extends PageBase {
     confirmTopicPublication();
   }
 
-  public boolean isTopicPresentByText(String s) {
-    return isElementPresent(
-        By.xpath("//*[contains(@class, 'media-text') and contains(text(), \'" + s + "\')]"));
-  }
 }
