@@ -1,6 +1,8 @@
 package core.wrappers.feed;
 
+import core.factories.FeedPostFactory;
 import core.transformers.FeedPostListTransformer;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -14,12 +16,12 @@ public class FeedPostGroup extends AbstractFeedPost {
 
   @Override
   public String getAuthor() {
-    WebElement titleElement = rootElement.findElement(FeedPostListTransformer.POST_AUTHOR_GROUP);
-    if (titleElement == null){
-      return "CANT GET FEED POST TITLE";
+    try {
+      WebElement titleElement = rootElement.findElement(FeedPostFactory.POST_AUTHOR_GROUP);
+      return titleElement.getText();
+    } catch (NoSuchElementException nse) {
+      return "Can't get author for feed post";
     }
-
-    return titleElement.getText();
   }
 
   @Override
