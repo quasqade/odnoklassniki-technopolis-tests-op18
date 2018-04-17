@@ -32,10 +32,10 @@ public class FeedTopicTest extends TestBase {
     //test
     GroupMainPage groupMainPage = new GroupMainPage(driver);
     groupMainPage.createNewTopic("Тест доставки ленты");
-    groupMainPage.returnToUserFeed();
+    groupMainPage.returnToUserPage();
 
     UserMainPage userMainPage = new UserMainPage(driver);
-    userMainPage.openGroupsFeedCategory();
+    //userMainPage.openGroupsFeedCategory();
 
     //conditions
     Assert.assertTrue(userMainPage.collectFeedPosts()); //проверяем, что лента не пустая

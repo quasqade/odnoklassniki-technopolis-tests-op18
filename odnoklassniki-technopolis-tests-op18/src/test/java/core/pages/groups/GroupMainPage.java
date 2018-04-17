@@ -19,7 +19,7 @@ public class GroupMainPage extends PageBase {
   private final static By TOPIC_POPUP_TEXT_INPUT = By
       .xpath("//*[contains(@data-module, 'postingForm/mediaText')]");
   private final static By TOPIC_POPUP_CONFIRM = By.xpath("//*[contains(@class, 'posting_submit')]");
-  private final static By USER_FEED = By.xpath("//*[contains(@href, '/feed')]");
+  private final static By USER_PAGE_LINK = By.xpath("//*[contains(@href, '/feed')]");
   private final static By OTHER_SECTIONS = By
       .xpath("//*[contains(@class, 'Dropdown') and contains(@id, 'otherSections')]");
   private final static By OTHER_SECTIONS_DROPDOWN = By.xpath(
@@ -64,8 +64,8 @@ public class GroupMainPage extends PageBase {
   /**
    * Возвращает на страницу пользователя
    */
-  public void returnToUserFeed() {
-    click(USER_FEED);
+  public void returnToUserPage() {
+    click(USER_PAGE_LINK);
   }
 
   /**
