@@ -33,8 +33,9 @@ public class UserMainPage extends PageBase {
   /**
    * Открывает страницу "Группы" в левом навбаре
    */
-  public void openGroupsByToolbar() {
+  public UserGroupsPage openGroupsByToolbar() {
     click(By.xpath(".//*[contains(@hrefattrs,'NavMenu_User_AltGroups')]"));
+    return new UserGroupsPage(driver);
   }
 
   /**

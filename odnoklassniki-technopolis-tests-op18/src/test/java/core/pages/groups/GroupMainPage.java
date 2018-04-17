@@ -1,6 +1,7 @@
 package core.pages.groups;
 
 import core.pages.PageBase;
+import core.pages.UserMainPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -64,8 +65,9 @@ public class GroupMainPage extends PageBase {
   /**
    * Возвращает на страницу пользователя
    */
-  public void returnToUserPage() {
+  public UserMainPage returnToUserPage() {
     click(USER_PAGE_LINK);
+    return new UserMainPage(driver);
   }
 
   /**

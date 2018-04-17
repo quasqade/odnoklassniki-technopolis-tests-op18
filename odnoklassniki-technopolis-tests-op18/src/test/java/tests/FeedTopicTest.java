@@ -18,8 +18,7 @@ public class FeedTopicTest extends TestBase {
   public void setUp() throws Exception {
     super.setUp();
     new SessionPage(driver).loginAuth(new TestBot("QA18testbot78", "QA18testbot"));
-    new UserMainPage(driver).openGroupsByToolbar();
-    UserGroupsPage userGroupsPage = new UserGroupsPage(driver);
+    UserGroupsPage userGroupsPage = new UserMainPage(driver).openGroupsByToolbar();
     userGroupsPage.createGroupByToolbar();
     userGroupsPage.selectPublicPage();
     userGroupsPage.inputGroupName("AddTopicTestGroup");
@@ -32,10 +31,8 @@ public class FeedTopicTest extends TestBase {
     //test
     GroupMainPage groupMainPage = new GroupMainPage(driver);
     groupMainPage.createNewTopic("Тест доставки ленты");
-    groupMainPage.returnToUserPage();
-
-    UserMainPage userMainPage = new UserMainPage(driver);
-    //userMainPage.openGroupsFeedCategory();
+    UserMainPage userMainPage = groupMainPage.returnToUserPage();
+    userMainPage.openGroupsFeedCategory();
 
     //conditions
     Assert.assertTrue(userMainPage.collectFeedPosts()); //проверяем, что лента не пустая
