@@ -100,6 +100,7 @@ public class GroupMainPage extends PageBase {
 
   /**
    * Создает новый топик, проходя ввод текста в попапе и подтверждение
+   * @param s текст топика
    */
   public void createNewTopic(String s) {
     clickCreateNewTopic();

@@ -2,6 +2,7 @@ package core.pages.groups;
 
 import core.pages.PageBase;
 import junit.framework.AssertionFailedError;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -90,7 +91,7 @@ public class GroupSettingsPage extends PageBase {
     try {
       new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(TIP));
     } catch (TimeoutException te) {
-      throw new AssertionFailedError("Settings tip is not disappearing");
+      Assert.fail("Settings tip is not disappearing");
     }
   }
 

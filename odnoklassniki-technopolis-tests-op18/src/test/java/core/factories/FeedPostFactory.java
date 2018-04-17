@@ -27,7 +27,7 @@ public class FeedPostFactory {
       feedPostWrapped = new FeedPostGroup(element);
     }
     if (feedPostWrapped == null) {
-      Assert.assertTrue(false, "Unidentified feed post type");
+      Assert.fail("Unidentified feed post type");
     }
     return feedPostWrapped;
   }
