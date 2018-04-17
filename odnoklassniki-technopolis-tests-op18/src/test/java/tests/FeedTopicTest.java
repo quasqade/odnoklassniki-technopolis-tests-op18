@@ -32,9 +32,7 @@ public class FeedTopicTest extends TestBase {
   public void testCase() throws Exception {
     //test
     GroupMainPage groupMainPage = new GroupMainPage(driver);
-    groupMainPage.clickCreateNewTopic();
-    groupMainPage.typeTextInNewTopic("Тест доставки ленты");
-    groupMainPage.confirmTopicPublication();
+    groupMainPage.createNewTopic("Тест доставки ленты");
     groupMainPage.returnToUserFeed();
 
     UserMainPage userMainPage = new UserMainPage(driver);

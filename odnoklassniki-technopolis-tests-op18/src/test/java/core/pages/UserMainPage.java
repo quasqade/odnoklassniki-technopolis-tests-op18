@@ -1,6 +1,6 @@
 package core.pages;
 
-import core.factories.FeedPostListFactory;
+import core.transformers.FeedPostListTransformer;
 import core.wrappers.feed.AbstractFeedPost;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -58,7 +58,7 @@ public class UserMainPage extends PageBase {
    */
   public boolean collectFeedPosts(){
     new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(FEED));
-    List<AbstractFeedPost> feedPosts = FeedPostListFactory.collectPosts(driver);
+    List<AbstractFeedPost> feedPosts = FeedPostListTransformer.collectPosts(driver);
     if (feedPosts.size()==0)
       return false;
 

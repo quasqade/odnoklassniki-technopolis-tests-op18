@@ -1,5 +1,6 @@
-package core.factories;
+package core.transformers;
 
+import core.factories.FeedPostFactory;
 import core.wrappers.feed.AbstractFeedPost;
 import core.wrappers.feed.FeedPostGroup;
 import core.wrappers.feed.FeedPostUser;
@@ -10,11 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class FeedPostListFactory {
+public class FeedPostListTransformer {
 
   private static final By FEED_POST = By.xpath("//*[@class='feed-w']");
-  public static final By POST_AUTHOR_USER = By.xpath("//*[@data-l='t,uL']");
-  public static final By POST_AUTHOR_GROUP = By.xpath("//*[@data-l='t,gL']");
+
 
   /**
    * Создает список всех постов на странице
@@ -26,18 +26,7 @@ public class FeedPostListFactory {
     List<AbstractFeedPost> feedPostsWrapped = new ArrayList<>();
     for (WebElement feedPost: feedPosts
     ) {
-      AbstractFeedPost feedPostWrapped = null;
-      if (feedPost.findElements(POST_AUTHOR_USER).size()!=0){
-        feedPostWrapped = new FeedPostUser(feedPost);
-      }
-      else if (feedPost.findElements(POST_AUTHOR_GROUP).size()!=0){
-        feedPostWrapped = new FeedPostGroup(feedPost);
-      }
-      if (feedPostWrapped == null){
-        Assert.assertTrue(false, "Unidentified feed post type");
-      }
-
-      feedPostsWrapped.add(feedPostWrapped);
+       feedPostsWrapped.add(FeedPostFactory.wrapElement(feedPost));
     }
     return feedPostsWrapped;
   }

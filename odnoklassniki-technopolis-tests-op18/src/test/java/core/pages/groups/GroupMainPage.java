@@ -82,12 +82,22 @@ public class GroupMainPage extends PageBase {
    */
   public boolean checkIfOtherSectionsIsOpen(){
     try{
-    new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(OTHER_SECTIONS_DROPDOWN));
+    new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(OTHER_SECTIONS_DROPDOWN));
     }
     catch (TimeoutException te){
       return false;
     }
     return true;
+  }
+
+  /**
+   * Создает новый топик, проходя ввод текста в попапе и подтверждение
+   * @param s
+   */
+  public void createNewTopic(String s){
+    clickCreateNewTopic();
+    typeTextInNewTopic(s);
+    confirmTopicPublication();
   }
 
   public boolean isTopicPresentByText(String s){
