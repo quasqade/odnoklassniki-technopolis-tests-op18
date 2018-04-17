@@ -1,5 +1,6 @@
 package tests;
 
+import core.helpers.GroupHelper;
 import core.pages.SessionPage;
 import core.pages.UserGroupsPage;
 import core.pages.UserMainPage;
@@ -7,6 +8,7 @@ import core.pages.groups.GroupMainPage;
 import core.wrappers.feed.AbstractFeedPost;
 import model.TestBot;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -14,23 +16,22 @@ import org.junit.Test;
  */
 public class FeedTopicTest extends TestBase {
 
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    new SessionPage(driver).loginAuth(new TestBot("QA18testbot78", "QA18testbot"));
-    UserGroupsPage userGroupsPage = new UserMainPage(driver).openGroupsByToolbar();
-    userGroupsPage.createGroupByToolbar();
-    userGroupsPage.selectPublicPage();
-    userGroupsPage.inputGroupName("AddTopicTestGroup");
-    userGroupsPage.selectCategoryComputers();
-    userGroupsPage.confirmGroupCreation();
+  public static final String GROUP_NAME = "AddTopicTestGroup";
+  public static final String TOPIC_TEXT = "Тест доставки ленты";
+  public static final TestBot USER_ACCOUNT = new TestBot("QA18testbot78", "QA18testbot");
+
+  @Before
+  public void preconditions() {
+    new SessionPage(driver).loginAuth(USER_ACCOUNT);
+    GroupHelper.createPublicPage(driver, GROUP_NAME);
+
   }
 
   @Test
   public void testCase() throws Exception {
     //test
     GroupMainPage groupMainPage = new GroupMainPage(driver);
-    groupMainPage.createNewTopic("Тест доставки ленты");
+    groupMainPage.createNewTopic(TOPIC_TEXT);
     UserMainPage userMainPage = groupMainPage.returnToUserPage();
     userMainPage.openGroupsFeedCategory();
 
@@ -38,8 +39,8 @@ public class FeedTopicTest extends TestBase {
     Assert.assertTrue(userMainPage.collectFeedPosts()); //проверяем, что лента не пустая
     AbstractFeedPost firstFeedPost = userMainPage.getFirstPostInFeed();
     //проверяем, что пост соответствует ожиданиям
-    Assert.assertEquals("AddTopicTestGroup", firstFeedPost.getAuthor());
-    Assert.assertEquals("Тест доставки ленты", firstFeedPost.getText());
+    Assert.assertEquals(GROUP_NAME, firstFeedPost.getAuthor());
+    Assert.assertEquals(TOPIC_TEXT, firstFeedPost.getText());
 
   }
 }

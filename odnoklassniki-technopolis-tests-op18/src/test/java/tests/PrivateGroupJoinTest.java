@@ -1,5 +1,6 @@
 package tests;
 
+import core.helpers.GroupHelper;
 import core.pages.SessionPage;
 import core.pages.UserGroupsPage;
 import core.pages.UserMainPage;
@@ -8,6 +9,7 @@ import core.pages.groups.GroupPrivacy;
 import core.pages.groups.GroupSettingsPage;
 import model.TestBot;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -15,17 +17,13 @@ import org.junit.Test;
  */
 public class PrivateGroupJoinTest extends TestBase {
 
-  @Override
-  public void setUp() throws Exception {
-    super.setUp();
-    new SessionPage(driver).loginAuth(new TestBot("QA18testbot78", "QA18testbot"));
-    new UserMainPage(driver).openGroupsByToolbar();
-    UserGroupsPage userGroupsPage = new UserGroupsPage(driver);
-    userGroupsPage.createGroupByToolbar();
-    userGroupsPage.selectPublicPage();
-    userGroupsPage.inputGroupName("PrivateJoinTestGroup");
-    userGroupsPage.selectCategoryComputers();
-    userGroupsPage.confirmGroupCreation();
+  public static final String GROUP_NAME = "PrivateJoinTestGroup";
+  public static final TestBot USER_ACCOUNT = new TestBot("QA18testbot78", "QA18testbot");
+
+  @Before
+  public void preconditions(){
+    new SessionPage(driver).loginAuth(USER_ACCOUNT);
+    GroupHelper.createPublicPage(driver, GROUP_NAME);
   }
 
 
@@ -37,8 +35,7 @@ public class PrivateGroupJoinTest extends TestBase {
     groupMainPage.openOtherSections();
     Assert.assertTrue("Выпадающее меню не появилось после нажатия Ещё",
         groupMainPage.checkIfOtherSectionsIsOpen());
-    groupMainPage.openGroupSettings();
-    GroupSettingsPage gsp = new GroupSettingsPage(driver);
+    GroupSettingsPage gsp = groupMainPage.openGroupSettings();
     gsp.changeType();
     Assert.assertEquals("Тип группы изменен", gsp.getLastTipText());
     gsp.changePrivacy(GroupPrivacy.PRIVATE);
