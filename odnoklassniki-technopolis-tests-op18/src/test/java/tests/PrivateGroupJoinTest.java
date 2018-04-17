@@ -2,6 +2,7 @@ package tests;
 
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
+import core.pages.UserMainPage;
 import core.pages.groups.GroupMainPage;
 import core.pages.groups.GroupPrivacy;
 import core.pages.groups.settings.GroupSettingsPage;
@@ -9,6 +10,8 @@ import core.pages.groups.settings.RightsSettingsPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 
 /**
  * Проверяется присоединение к закрытой группе путем заявки
@@ -31,9 +34,9 @@ public class PrivateGroupJoinTest extends TestBase {
 
     //test
     String groupUrl = driver.getCurrentUrl(); //записываем адрес страницы, чтобы потом возвращаться
-    GroupMainPage groupMainPage = new GroupMainPage(driver);
-    groupMainPage.openOtherSections();
-    GroupSettingsPage gsp = groupMainPage.openGroupSettings();
+    GroupMainPage gmp = new GroupMainPage(driver);
+    gmp.openOtherSections();
+    GroupSettingsPage gsp = gmp.openGroupSettings();
     gsp.changeType();
     gsp.changePrivacy(GroupPrivacy.PRIVATE);
     gsp.confirmSettings();
@@ -41,9 +44,37 @@ public class PrivateGroupJoinTest extends TestBase {
     rsp.selectJoinNotificationFrequency("Сразу");
     rsp.confirmSettings();
 
+    //авторизация от второго пользователя
+    stop();
+    init();
+    new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
+    new UserMainPage(driver); //чтобы дождаться загрузки страницы
+    driver.navigate().to(groupUrl);
+    gmp = new GroupMainPage(driver);
+    gmp.joinGroup();
+    Assert.assertTrue(gmp.isInvitationPending());
 
+    //авторизация от первого пользователя
+    stop();
+    init();
+    new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
+    new UserMainPage(driver); //чтобы дождаться загрузки страницы
+    driver.navigate().to(groupUrl);
+    gmp = new GroupMainPage(driver);
+    Assert.assertTrue(gmp.getAmountOfPendingRequests() > 0);
+    int members = gmp.getAmountOfMembers();
+    gmp.acceptFirstJoinRequest();
+    Assert.assertEquals(gmp.getAmountOfMembers(), members+1);
+
+    //авторизация от второго пользователя
+    stop();
+    init();
+    new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
+    new UserMainPage(driver); //чтобы дождаться загрузки страницы
+    driver.navigate().to(groupUrl);
 
     //conditions
+    Assert.assertTrue(new GroupMainPage(driver).isMember());
 
   }
 }

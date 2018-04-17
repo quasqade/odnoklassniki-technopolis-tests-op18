@@ -2,6 +2,7 @@ package core.pages;
 
 import com.google.common.base.Preconditions;
 import java.util.concurrent.TimeUnit;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -26,7 +27,9 @@ public abstract class PageBase {
   protected abstract void check();
 
   public void click(By xpath) {
-    new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(xpath));
+    if (!explicitWait(ExpectedConditions.elementToBeClickable(xpath), 5,500)){
+      Assert.fail("Элемент не кликабелен: " + xpath);
+    }
     driver.findElement(xpath).click();
   }
 

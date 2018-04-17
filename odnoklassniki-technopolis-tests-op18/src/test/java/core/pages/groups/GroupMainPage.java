@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,6 +30,14 @@ public class GroupMainPage extends PageBase {
       "//*[@data-module='SimplePopup' and contains(@data-trigger-selector, 'otherSections')]/parent::*");
   private final static By DROPDOWN_SETTINGS = By
       .xpath("//*[contains(@hrefattrs, 'altGroupSettings')]");
+  private final static By JOIN_BUTTON = By.xpath("//*[contains(@href, 'GroupJoin')]");
+  private final static By GROUP_CARD = By.xpath("//*[contains(@id, 'TopCardAltGroup')]");
+  private final static By GROUP_CARD_PENDING_JOIN = By.xpath("//*[contains(@class, 'dropdown') and contains(@class, 'disabled')]");
+  private final static By INVITATIONS_PANEL = By.xpath("//*[contains(@id, 'PossibleFriendsPanel')]");
+  private final static By JOIN_REQUESTS_COUNTER = By.xpath("//*[@id='joinRequestsCount']");
+  private final static By ACCEPT_JOIN_REQUEST = By.xpath("//span[contains(@id, 'GroupJoinRequests')]");
+  private final static By MEMBER_COUNTER = By.xpath("//*[@id='membersCountEl']");
+  private final static By MAIN_DROPDOWN = By.xpath("//*[contains(@class, 'primary-dropdown')]");
 
   public GroupMainPage(WebDriver driver) {
     super(driver);
@@ -114,6 +123,62 @@ public class GroupMainPage extends PageBase {
     clickCreateNewTopic();
     typeTextInNewTopic(s);
     confirmTopicPublication();
+  }
+
+  /**
+   * Кликает присоединение к группе
+   */
+  public void joinGroup(){
+    click(JOIN_BUTTON);
+  }
+
+  /**
+   * Проверяет, ожидается ли запрос на вступление в группу
+   */
+  public boolean isInvitationPending(){
+      return explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_CARD_PENDING_JOIN),5,500);
+  }
+
+  /**
+   * Возвращает число запросов на вступление
+   * @return число запросов
+   */
+  public int getAmountOfPendingRequests(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(INVITATIONS_PANEL), 5, 500)){
+      return 0;
+    }
+    WebElement invitationsPanel = driver.findElement(INVITATIONS_PANEL);
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(JOIN_REQUESTS_COUNTER), 5, 500))
+      return 0;
+
+    return Integer.parseInt(driver.findElement(JOIN_REQUESTS_COUNTER).getText());
+  }
+
+  /**
+   * Принимает первую заявку на вступление
+   */
+  public void acceptFirstJoinRequest(){
+    click(ACCEPT_JOIN_REQUEST);
+  }
+
+  /**
+   * Возвращает число участников, перед этим обновляя страницу чтобы счетчик был корректным
+   * @return число участниоков, 0 если что-то пошло не так
+   */
+  public int getAmountOfMembers(){
+    driver.navigate().refresh();
+    if (explicitWait(ExpectedConditions.visibilityOfElementLocated(MEMBER_COUNTER), 5, 500)){
+      return Integer.parseInt(driver.findElement(MEMBER_COUNTER).getText());
+    }
+    return 0;
+  }
+
+  /**
+   * Проверяет, состоит ли участник в группе
+   * @return false если нет
+   */
+  public boolean isMember(){
+    return explicitWait(ExpectedConditions.visibilityOfElementLocated(MAIN_DROPDOWN), 5, 500);
   }
 
 }
