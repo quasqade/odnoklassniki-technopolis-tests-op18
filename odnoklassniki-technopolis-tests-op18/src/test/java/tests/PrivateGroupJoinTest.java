@@ -8,6 +8,7 @@ import core.pages.groups.GroupSettingsPage;
 import core.pages.groups.GroupPrivacy;
 import model.TestBot;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -15,10 +16,9 @@ import org.junit.Test;
  */
 public class PrivateGroupJoinTest extends TestBase {
 
-  @Test
-  public void testCase() throws Exception {
-
-    //preconditions
+  @Override
+  public void setUp() throws Exception{
+    super.setUp();
     new SessionPage(driver).loginAuth(new TestBot("QA18testbot78", "QA18testbot"));
     new UserMainPage(driver).openGroupsByToolbar();
     UserGroupsPage userGroupsPage = new UserGroupsPage(driver);
@@ -27,6 +27,11 @@ public class PrivateGroupJoinTest extends TestBase {
     userGroupsPage.inputGroupName("PrivateJoinTestGroup");
     userGroupsPage.selectCategoryComputers();
     userGroupsPage.confirmGroupCreation();
+  }
+
+
+  @Test
+  public void testCase() throws Exception {
 
     //test
     GroupMainPage groupMainPage = new GroupMainPage(driver);

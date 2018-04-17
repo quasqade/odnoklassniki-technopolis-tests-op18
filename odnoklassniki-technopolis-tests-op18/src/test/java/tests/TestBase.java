@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestBase {
+public abstract class TestBase {
   protected String baseUrl;
   protected WebDriver driver;
   private StringBuffer verificationErrors = new StringBuffer();
