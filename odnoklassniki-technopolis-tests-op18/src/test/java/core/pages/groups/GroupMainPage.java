@@ -23,7 +23,6 @@ public class GroupMainPage extends PageBase {
   private final static By TOPIC_POPUP_TEXT_INPUT = By
       .xpath("//*[contains(@data-module, 'postingForm/mediaText')]");
   private final static By TOPIC_POPUP_CONFIRM = By.xpath("//*[contains(@class, 'posting_submit')]");
-  private final static By USER_PAGE_LINK = By.xpath("//*[contains(@href, '/feed')]");
   private final static By OTHER_SECTIONS = By
       .xpath("//*[contains(@class, 'Dropdown') and contains(@id, 'otherSections')]");
   private final static By OTHER_SECTIONS_DROPDOWN = By.xpath(
@@ -40,6 +39,7 @@ public class GroupMainPage extends PageBase {
       .xpath("//span[contains(@id, 'GroupJoinRequests')]");
   private final static By MEMBER_COUNTER = By.xpath("//*[@id='membersCountEl']");
   private final static By MAIN_DROPDOWN = By.xpath("//*[contains(@class, 'primary-dropdown')]");
+  private final static By NAV_TOPICS = By.xpath("//*[contains(@data-l, 'Group_Forum')]");
 
   public GroupMainPage(WebDriver driver) {
     super(driver);
@@ -75,13 +75,7 @@ public class GroupMainPage extends PageBase {
     click(TOPIC_POPUP_CONFIRM);
   }
 
-  /**
-   * Возвращает на страницу пользователя
-   */
-  public UserMainPage returnToUserPage() {
-    click(USER_PAGE_LINK);
-    return new UserMainPage(driver);
-  }
+
 
   /**
    * Открывает выпадающий список "Ещё"
@@ -122,10 +116,11 @@ public class GroupMainPage extends PageBase {
    *
    * @param s текст топика
    */
-  public void createNewTopic(String s) {
+  public GroupTopicsPage createNewTopic(String s) {
     clickCreateNewTopic();
     typeTextInNewTopic(s);
     confirmTopicPublication();
+    return new GroupTopicsPage(driver);
   }
 
   /**
@@ -184,6 +179,11 @@ public class GroupMainPage extends PageBase {
    */
   public boolean isMember() {
     return explicitWait(ExpectedConditions.visibilityOfElementLocated(MAIN_DROPDOWN), 5, 500);
+  }
+
+  public GroupTopicsPage goToTopics(){
+    click(NAV_TOPICS);
+    return new GroupTopicsPage(driver);
   }
 
 }

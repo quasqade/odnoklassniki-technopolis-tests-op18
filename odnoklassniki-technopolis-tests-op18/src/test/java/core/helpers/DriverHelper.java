@@ -1,82 +1,31 @@
-package core.pages;
+package core.helpers;
 
 import com.google.common.base.Preconditions;
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public abstract class PageBase {
+/**
+ * Содержит некоторые полезные методы для работы с драйвером не из страниц (скопипащено из PageBase)
+ */
+public class DriverHelper {
 
-  protected final WebDriver driver;
-  private boolean acceptNextAlert = true;
-  private final static By USER_PAGE_LINK = By.xpath("//*[contains(@href, '/feed')]");
 
-  protected PageBase(WebDriver driver) {
-    this.driver = driver;
-    check();
-  }
-
-  protected abstract void check();
-
-  protected void click(By xpath) {
-    if (!explicitWait(ExpectedConditions.elementToBeClickable(xpath), 5, 500)) {
+  public static void click(WebDriver driver, By xpath) {
+    if (!explicitWait(driver, ExpectedConditions.elementToBeClickable(xpath), 5, 500)) {
       Assert.fail("Элемент не кликабелен: " + xpath);
     }
     driver.findElement(xpath).click();
   }
 
-  protected void type(String name, By field_name) {
-    driver.findElement(field_name).clear();
-    driver.findElement(field_name).sendKeys(name);
-  }
-
-  public boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
-
-
   /**
    * Ожидание
    */
-  protected boolean explicitWait(final ExpectedCondition<?> condition, long maxCheckTimeInSeconds,
+  public static boolean explicitWait(WebDriver driver, final ExpectedCondition<?> condition, long maxCheckTimeInSeconds,
       long millisecondsBetweenChecks) {
     Preconditions.checkNotNull(condition, "Condition must be not null");
     Preconditions.checkArgument(TimeUnit.MINUTES.toSeconds(3) > maxCheckTimeInSeconds,
@@ -111,7 +60,7 @@ public abstract class PageBase {
    * @param maxCheckTimeInSeconds максимальное время проверки в секундах
    * @param millisecondsBetweenChecks интервал между проверками в милисекундах
    */
-  private void checkConditionTimeouts(long maxCheckTimeInSeconds, long millisecondsBetweenChecks) {
+  private static void checkConditionTimeouts(long maxCheckTimeInSeconds, long millisecondsBetweenChecks) {
     Preconditions
         .checkState(maxCheckTimeInSeconds > 0, "maximum check time in seconds must be not 0");
     Preconditions.checkState(millisecondsBetweenChecks > 0,
@@ -119,25 +68,4 @@ public abstract class PageBase {
     Preconditions.checkState(millisecondsBetweenChecks < (maxCheckTimeInSeconds * 1000),
         "Millis between checks must be less than max seconds to wait");
   }
-
-  public void moveToElement(WebElement webElement) {
-    new Actions(driver).moveToElement(webElement).build().perform();
-  }
-
-  protected boolean isElementVisible(By by) {
-    try {
-      return driver.findElement(by).isDisplayed();
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  /**
-   * Возвращает на страницу пользователя
-   */
-  public UserMainPage returnToUserPage() {
-    click(USER_PAGE_LINK);
-    return new UserMainPage(driver);
-  }
 }
-
