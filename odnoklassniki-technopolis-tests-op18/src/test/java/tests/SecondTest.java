@@ -11,12 +11,12 @@ public class SecondTest extends TestBase {
   @Test
   public void testCase() throws Exception {
 
-    new SessionPage(driver).loginAuth(new TestBot("79219213098", "59pckgkC259C"));
+    new SessionPage(driver).loginAuth(new TestBot("QA18testbot80 ", "QA18testbot"));
     new UserMainPage(driver).openGroupsByToolbar();
     UserGroupsPage userGroupsPage = new UserGroupsPage(driver);
     userGroupsPage.createGroupByToolbar();
     userGroupsPage.selectPublicPage();
-    userGroupsPage.inputGroupName("Group");
+    userGroupsPage.inputGroupName("Test group");
     userGroupsPage.confirmGroupCreation();
     //todo проверка созданой группы
   }

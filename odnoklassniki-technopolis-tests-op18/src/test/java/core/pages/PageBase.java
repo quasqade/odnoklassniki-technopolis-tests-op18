@@ -39,6 +39,10 @@ public abstract class PageBase {
     driver.findElement(field_name).sendKeys(name);
   }
 
+  public void refreshWebPage(){
+    driver.navigate().refresh();
+  }
+
   public boolean isElementPresent(By by) {
     try {
       driver.findElement(by);

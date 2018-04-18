@@ -1,5 +1,6 @@
 package core.pages.groups.settings;
 
+import core.pages.PageBase;
 import core.pages.groups.GroupPrivacy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -14,16 +15,36 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class GroupSettingsPage extends AbstractSettingsPage {
 
   private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
-  private static final By CHANGE_TYPE_CONFIRM_POPUP = By
-      .xpath("//*[contains(@id, 'GroupChangeType')]");
+  private static final By CHANGE_TYPE_CONFIRM_POPUP = By.xpath("//*[contains(@id, 'GroupChangeType')]");
   private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
   private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
-
+  private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
+  private static final By BACK_MAIN_GROUP_PAGE = By.xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
 
   public GroupSettingsPage(WebDriver driver) {
     super(driver);
   }
 
+  /**
+   * Меняет название группы в форме имени
+   */
+  public void changeName(String newName){
+   type(newName,CHANGE_NAME_FIELD);
+  }
+
+  /**
+   * Получаем название группы из формы имени
+   */
+  public String getNameFromField(){
+    return driver.findElement(CHANGE_NAME_FIELD).getText();
+  }
+
+  /**
+   * Получаем название группы из поля
+   */
+  public String getNameFromBackLink(){
+    return driver.findElement(BACK_MAIN_GROUP_PAGE).getText();
+  }
   /**
    * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
    */

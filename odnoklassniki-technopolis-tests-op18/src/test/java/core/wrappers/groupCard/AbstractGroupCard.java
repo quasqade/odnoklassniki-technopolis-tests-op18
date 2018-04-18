@@ -1,5 +1,7 @@
 package core.wrappers.groupCard;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -8,30 +10,25 @@ import org.openqa.selenium.WebElement;
 
 public abstract class AbstractGroupCard {
 
-  protected WebElement rootElement;
+    protected WebElement rootElement;
+    protected WebDriver driver;
 
-  public AbstractGroupCard(WebElement rootElement) {
-    this.rootElement = rootElement;
-  }
+    public AbstractGroupCard(WebElement rootElement, WebDriver driver) {
+        this.rootElement = rootElement;
+        this.driver = driver;
+    }
 
-  /**
-   * Возвращает название группы
-   *
-   * @return текст имени
-   */
-  abstract public String getName();
-
-  /**
-   * Возвращает количество подписчиков
-   *
-   * @return текст имени
-   */
-  abstract public String getFollowersNumber();
+    /**
+     * Возвращает название группы
+     *
+     * @return текст имени
+     */
+    abstract public String getName();
 
 
-  /**
-   * Клик по карте
-   */
-  abstract public void clickToGroupCard();
+    /**
+     * Клик по карте
+     */
+    abstract public void clickToGroupCard();
 
 }

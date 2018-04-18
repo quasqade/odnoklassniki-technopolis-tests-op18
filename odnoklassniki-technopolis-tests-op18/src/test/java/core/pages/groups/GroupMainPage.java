@@ -28,7 +28,7 @@ public class GroupMainPage extends PageBase {
   private final static By OTHER_SECTIONS_DROPDOWN = By.xpath(
       "//*[@data-module='SimplePopup' and contains(@data-trigger-selector, 'otherSections')]/parent::*");
   private final static By DROPDOWN_SETTINGS = By
-      .xpath("//*[contains(@hrefattrs, 'altGroupSettings')]");
+      .xpath(".//a[contains(@hrefattrs,'AltGroupTopCardButtonsEdit')]");
   private final static By JOIN_BUTTON = By.xpath("//*[contains(@href, 'GroupJoin')]");
   private final static By GROUP_CARD_PENDING_JOIN = By
       .xpath("//*[contains(@class, 'dropdown') and contains(@class, 'disabled')]");

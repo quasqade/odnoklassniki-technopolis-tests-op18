@@ -23,7 +23,6 @@ public class FeedTopicTest extends TestBase {
   public void preconditions() {
     new SessionPage(driver).loginAuth(USER_ACCOUNT);
     GroupHelper.createPublicPage(driver, GROUP_NAME);
-
   }
 
   @Test

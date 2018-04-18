@@ -1,6 +1,5 @@
 package core.factories;
 
-
 import core.wrappers.feed.AbstractFeedPost;
 import core.wrappers.feed.FeedPostGroup;
 import core.wrappers.feed.FeedPostUser;
