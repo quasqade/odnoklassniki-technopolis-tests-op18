@@ -3,8 +3,8 @@ package tests;
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
 import core.pages.groups.main.GroupMainPage;
-import core.pages.groups.settings.main.GroupSettingsPage;
 import core.pages.groups.settings.ModeratorsSettingsPage;
+import core.pages.groups.settings.main.GroupSettingsPage;
 import core.pages.groups.settings.main.GroupType;
 import core.pages.groups.settings.rights.RightsSettingsPage;
 import core.pages.groups.settings.rights.ShowPhotosInFeedOption;
@@ -40,7 +40,8 @@ public class CreatePublicPageTest extends TestBase {
     RightsSettingsPage rsp = gsp.clickRights();
     Assert.assertFalse(rsp.canMembersSuggestTopics(),
         "Участники не должны предлагать темы по умолчанию");
-    Assert.assertEquals(rsp.whatPhotosAreShownInFeed(), ShowPhotosInFeedOption.OF_ONLY_MODERATORS, "По умолчанию должны показываться только фото от администрации");
+    Assert.assertEquals(rsp.whatPhotosAreShownInFeed(), ShowPhotosInFeedOption.OF_ONLY_MODERATORS,
+        "По умолчанию должны показываться только фото от администрации");
     ModeratorsSettingsPage msp = rsp.clickModerators();
     Assert.assertTrue(msp.areModeratorsHidden());
     Assert.assertTrue(msp.isOwnerHidden());

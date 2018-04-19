@@ -1,7 +1,6 @@
 package core.pages.groups.settings;
 
 import core.pages.PageBase;
-import core.pages.groups.settings.main.GroupSettingsPage;
 import core.pages.groups.settings.rights.RightsSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
