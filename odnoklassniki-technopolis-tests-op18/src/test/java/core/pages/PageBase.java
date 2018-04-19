@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -39,6 +40,15 @@ public abstract class PageBase {
     driver.findElement(field_name).sendKeys(name);
   }
 
+  protected void scrollToElement(By locator){
+    WebElement element = driver.findElement(locator);
+    ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
   public void refreshWebPage() {
     driver.navigate().refresh();
   }

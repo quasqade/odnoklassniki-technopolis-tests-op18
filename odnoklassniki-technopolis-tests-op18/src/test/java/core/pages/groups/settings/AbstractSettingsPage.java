@@ -90,6 +90,7 @@ public abstract class AbstractSettingsPage extends PageBase {
    * Переходим на главную страницу группы
    */
   public void toGroupMainPage() {
+    scrollToElement(NAME_GROUP_IN_SETTINGS);
     click(NAME_GROUP_IN_SETTINGS);
   }
 
