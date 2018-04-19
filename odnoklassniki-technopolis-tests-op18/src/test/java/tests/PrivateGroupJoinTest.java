@@ -10,6 +10,7 @@ import core.pages.groups.settings.RightsSettingsPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 /**
@@ -33,6 +34,7 @@ public class PrivateGroupJoinTest extends TestBase {
 
     //test
     String groupUrl = driver.getCurrentUrl(); //записываем адрес страницы, чтобы потом возвращаться
+    WebDriver firstDriver = driver;
     GroupMainPage gmp = new GroupMainPage(driver);
     gmp.openOtherSections();
     GroupSettingsPage gsp = gmp.openGroupSettings();
@@ -44,8 +46,8 @@ public class PrivateGroupJoinTest extends TestBase {
     rsp.confirmSettings();
 
     //авторизация от второго пользователя
-    stop();
     init();
+    WebDriver secondDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
     new UserMainPage(driver); //чтобы дождаться загрузки страницы
     driver.navigate().to(groupUrl);
@@ -53,11 +55,8 @@ public class PrivateGroupJoinTest extends TestBase {
     gmp.joinGroup();
     Assert.assertTrue(gmp.isInvitationPending());
 
-    //авторизация от первого пользователя
-    stop();
-    init();
-    new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
-    new UserMainPage(driver); //чтобы дождаться загрузки страницы
+    //первый пользователь
+    switchDriver(firstDriver);
     driver.navigate().to(groupUrl);
     gmp = new GroupMainPage(driver);
     Assert.assertTrue(gmp.getAmountOfPendingRequests() > 0);
@@ -65,12 +64,9 @@ public class PrivateGroupJoinTest extends TestBase {
     gmp.acceptFirstJoinRequest();
     Assert.assertEquals(gmp.getAmountOfMembers(), members + 1);
 
-    //авторизация от второго пользователя
-    stop();
-    init();
-    new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
-    new UserMainPage(driver); //чтобы дождаться загрузки страницы
-    driver.navigate().to(groupUrl);
+    //второй пользователь
+    switchDriver(secondDriver);
+    driver.navigate().refresh();
 
     //conditions
     Assert.assertTrue(new GroupMainPage(driver).isMember());
