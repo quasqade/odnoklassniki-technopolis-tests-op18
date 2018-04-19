@@ -3,10 +3,11 @@ package tests;
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
 import core.pages.UserMainPage;
-import core.pages.groups.GroupMainPage;
-import core.pages.groups.GroupPrivacy;
-import core.pages.groups.settings.GroupSettingsPage;
-import core.pages.groups.settings.RightsSettingsPage;
+import core.pages.groups.main.GroupMainPage;
+import core.pages.groups.settings.main.GroupPrivacy;
+import core.pages.groups.settings.main.GroupSettingsPage;
+import core.pages.groups.settings.rights.JoinNotificationFrequency;
+import core.pages.groups.settings.rights.RightsSettingsPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class PrivateGroupJoinTest extends TestBase {
     gsp.changePrivacy(GroupPrivacy.PRIVATE);
     gsp.confirmSettings();
     RightsSettingsPage rsp = gsp.clickRights();
-    rsp.selectJoinNotificationFrequency("Сразу");
+    rsp.selectJoinNotificationFrequency(JoinNotificationFrequency.IMMEDIATELY);
     rsp.confirmSettings();
 
     //авторизация от второго пользователя
@@ -69,7 +70,7 @@ public class PrivateGroupJoinTest extends TestBase {
     refresh();
 
     //conditions
-    Assert.assertTrue(new GroupMainPage(driver).isMember());
+    Assert.assertTrue(new GroupMainPage(driver).isMemberDropdownPresent());
 
   }
 }

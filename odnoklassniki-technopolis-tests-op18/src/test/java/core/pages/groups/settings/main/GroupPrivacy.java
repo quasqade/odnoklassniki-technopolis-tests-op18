@@ -1,4 +1,4 @@
-package core.pages.groups;
+package core.pages.groups.settings.main;
 
 /**
  * Представляет возможные типы группы по уровню доступа

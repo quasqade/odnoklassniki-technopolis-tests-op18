@@ -16,7 +16,7 @@ public class GroupTopicsPage extends PageBase {
       .xpath("//*[contains(@data-l, 'Group_Forum') and contains(@class, 'Active')]");
   private List<GroupTopicWrapper> groupTopics;
 
-  protected GroupTopicsPage(WebDriver driver) {
+  public GroupTopicsPage(WebDriver driver) {
     super(driver);
   }
 

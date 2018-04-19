@@ -2,8 +2,8 @@ package tests;
 
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
-import core.pages.groups.GroupMainPage;
-import core.pages.groups.settings.GroupSettingsPage;
+import core.pages.groups.main.GroupMainPage;
+import core.pages.groups.settings.main.GroupSettingsPage;
 import model.TestBot;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,7 +36,7 @@ public class ChangeGroupNameTest extends TestBase {
     groupSettingsPage.refreshWebPage();
 
     //проверяем, что название соответствует новоуму названию
-    //Assert.assertEquals(newName, groupSettingsPage.getNameFromField());
+    Assert.assertEquals(newName, groupSettingsPage.getNameFromField());
     Assert.assertEquals(newName, groupSettingsPage.getNameFromBackLink());
     //тут еще какие-то проверки
 

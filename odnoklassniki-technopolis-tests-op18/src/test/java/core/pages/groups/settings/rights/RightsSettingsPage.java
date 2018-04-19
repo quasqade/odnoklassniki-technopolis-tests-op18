@@ -1,5 +1,6 @@
-package core.pages.groups.settings;
+package core.pages.groups.settings.rights;
 
+import core.pages.groups.settings.AbstractSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -38,15 +39,11 @@ public class RightsSettingsPage extends AbstractSettingsPage {
    *
    * @param frequency частота текстом
    */
-  public void selectJoinNotificationFrequency(String frequency) {
+  public void selectJoinNotificationFrequency(JoinNotificationFrequency frequency) {
     waitForVisibility(NOTIFICATION_FREQUENCY_DROPDOWN,
         "Не удалось получить параметры частоты оповещения");
     Select select = new Select(driver.findElement(NOTIFICATION_FREQUENCY_DROPDOWN));
-    try {
-      select.selectByVisibleText(frequency);
-    } catch (NoSuchElementException nse) {
-      Assert.fail("Неизвестная частота получения оповещения: " + frequency);
-    }
+    select.selectByValue(frequency.toString());
   }
 
   /**
@@ -65,10 +62,11 @@ public class RightsSettingsPage extends AbstractSettingsPage {
    *
    * @return строка со значением, выбранным в выпадающем списке
    */
-  public String whatPhotosAreShownInFeed() {
+  public ShowPhotosInFeedOption whatPhotosAreShownInFeed() {
     waitForVisibility(SHOW_PHOTOS_IN_FEED, "Не удалось обнаружить настройку показа фото в ленте");
     Select select = new Select(driver.findElement(SHOW_PHOTOS_IN_FEED));
-    return select.getFirstSelectedOption().getText();
+    ShowPhotosInFeedOption option = ShowPhotosInFeedOption.valueOf(select.getFirstSelectedOption().getAttribute("value"));
+    return option;
   }
 
 }

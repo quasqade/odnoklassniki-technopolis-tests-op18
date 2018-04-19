@@ -1,7 +1,8 @@
-package core.pages.groups;
+package core.pages.groups.main;
 
 import core.pages.PageBase;
-import core.pages.groups.settings.GroupSettingsPage;
+import core.pages.groups.GroupTopicsPage;
+import core.pages.groups.settings.main.GroupSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -178,7 +179,7 @@ public class GroupMainPage extends PageBase {
    *
    * @return false если нет
    */
-  public boolean isMember() {
+  public boolean isMemberDropdownPresent() {
     return explicitWait(ExpectedConditions.visibilityOfElementLocated(MAIN_DROPDOWN), 5, 500);
   }
 

@@ -1,6 +1,6 @@
-package core.pages.groups.settings;
+package core.pages.groups.settings.main;
 
-import core.pages.groups.GroupPrivacy;
+import core.pages.groups.settings.AbstractSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -67,6 +67,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
    * @param type тип группы
    */
   public void changePrivacy(GroupPrivacy type) {
+    //TODO
     Select select = new Select(driver.findElement(PRIVACY_DROPDOWN));
     switch (type) {
       case OPEN:

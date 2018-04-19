@@ -1,6 +1,7 @@
 package core.pages.groups.settings;
 
 import core.pages.PageBase;
+import core.pages.groups.settings.rights.RightsSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -42,6 +43,7 @@ public abstract class AbstractSettingsPage extends PageBase {
   /**
    * Обновляет последнее всплывающее уведомление (используйте getLastTipText() чтобы его получить)
    */
+  //TODO вернуть значение
   protected void updateLastTip() {
     try {
       new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(TIP));

@@ -3,7 +3,7 @@ package tests;
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
 import core.pages.UserMainPage;
-import core.pages.groups.GroupMainPage;
+import core.pages.groups.main.GroupMainPage;
 import core.wrappers.feed.AbstractFeedPost;
 import model.TestBot;
 import org.junit.Assert;

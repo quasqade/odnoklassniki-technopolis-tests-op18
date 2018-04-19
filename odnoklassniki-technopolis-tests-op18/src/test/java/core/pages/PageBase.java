@@ -28,7 +28,7 @@ public abstract class PageBase {
   protected abstract void check();
 
   protected void click(By xpath) {
-    if (!explicitWait(ExpectedConditions.elementToBeClickable(xpath), 5, 500)) {
+    if (!explicitWait(ExpectedConditions.elementToBeClickable(xpath), 10, 500)) {
       Assert.fail("Элемент не кликабелен: " + xpath);
     }
     driver.findElement(xpath).click();

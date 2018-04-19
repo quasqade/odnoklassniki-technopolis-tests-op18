@@ -2,7 +2,7 @@ package core.helpers;
 
 import core.pages.UserGroupsPage;
 import core.pages.UserMainPage;
-import core.pages.groups.GroupMainPage;
+import core.pages.groups.main.GroupMainPage;
 import org.openqa.selenium.WebDriver;
 
 /**

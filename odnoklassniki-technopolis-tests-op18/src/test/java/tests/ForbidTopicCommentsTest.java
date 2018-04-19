@@ -4,7 +4,7 @@ import core.helpers.GroupHelper;
 import core.pages.SessionPage;
 import core.pages.UserMainPage;
 import core.pages.dialogues.CommentPostingOverlay;
-import core.pages.groups.GroupMainPage;
+import core.pages.groups.main.GroupMainPage;
 import core.pages.groups.GroupTopicsPage;
 import core.wrappers.topics.GroupTopicWrapper;
 import model.TestBot;
@@ -41,9 +41,9 @@ public class ForbidTopicCommentsTest extends TestBase {
     new UserMainPage(driver); //дождаться загрузки страницы
     goToRememberedUrl();
     gmp = new GroupMainPage(driver);
-    Assert.assertFalse(gmp.isMember(), "Пользователь уже состоит в группе");
+    Assert.assertFalse(gmp.isMemberDropdownPresent(), "Пользователь уже состоит в группе");
     gmp.joinGroup();
-    Assert.assertTrue(gmp.isMember(), "Не удалось вступить в группу");
+    Assert.assertTrue(gmp.isMemberDropdownPresent(), "Не удалось вступить в группу");
 
     switchDriver(firstDriver);
   }
@@ -57,7 +57,7 @@ public class ForbidTopicCommentsTest extends TestBase {
     Assert.assertEquals(firstTopic.getText(), TOPIC_TEXT);
     Assert.assertTrue(firstTopic.areCommentsAllowed(), "Комментарии уже запрещены");
     firstTopic.forbidComments();
-    refresh(); //можно напихать ожиданий перед сборкой тем но там сложно угадать когда новые а когда старые
+    //refresh(); //можно напихать ожиданий перед сборкой тем но там сложно угадать когда новые а когда старые
     gtp.collectTopics();
     firstTopic = gtp.getGroupTopics().get(0);
     Assert.assertFalse(firstTopic.areCommentsAllowed(), "Не удалось запретить комментарии");
