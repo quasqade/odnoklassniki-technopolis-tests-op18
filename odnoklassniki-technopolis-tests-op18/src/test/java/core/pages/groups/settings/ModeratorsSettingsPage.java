@@ -1,9 +1,7 @@
 package core.pages.groups.settings;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ModeratorsSettingsPage extends AbstractSettingsPage {
 
@@ -18,9 +16,7 @@ public class ModeratorsSettingsPage extends AbstractSettingsPage {
   @Override
   protected void check() {
     super.check();
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(MODERATORS_FORM), 10, 500)) {
-      Assert.fail("Не удалось загрузить страницу настройки администрации в группе");
-    }
+    waitForVisibility(MODERATORS_FORM,  "Не удалось загрузить страницу настройки администрации в группе");
   }
 
   /**
@@ -28,8 +24,7 @@ public class ModeratorsSettingsPage extends AbstractSettingsPage {
    * @return
    */
   public boolean areModeratorsHidden(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(HIDE_MODERATORS_CHECKBOX), 5, 500))
-      Assert.fail("Не удалось обнаружить чекбокс сокрытия модераторов");
+    waitForVisibility(HIDE_MODERATORS_CHECKBOX,  "Не удалось обнаружить чекбокс сокрытия модераторов");
 
     return driver.findElement(HIDE_MODERATORS_CHECKBOX).isSelected();
   }
@@ -39,9 +34,9 @@ public class ModeratorsSettingsPage extends AbstractSettingsPage {
    * @return
    */
   public boolean isOwnerHidden(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(HIDE_OWNER_CHECKBOX), 5, 500))
-      Assert.fail("Не удалось обнаружить чекбокс сокрытия модераторов");
+    waitForVisibility(HIDE_OWNER_CHECKBOX,  "Не удалось обнаружить чекбокс сокрытия модераторов");
 
     return driver.findElement(HIDE_OWNER_CHECKBOX).isSelected();
   }
+
 }

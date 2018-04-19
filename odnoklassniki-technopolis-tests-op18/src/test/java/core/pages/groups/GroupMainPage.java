@@ -182,6 +182,10 @@ public class GroupMainPage extends PageBase {
     return explicitWait(ExpectedConditions.visibilityOfElementLocated(MAIN_DROPDOWN), 5, 500);
   }
 
+  /**
+   * Переходит к странице Темы
+   * @return страница Темы
+   */
   public GroupTopicsPage goToTopics(){
     click(NAV_TOPICS);
     return new GroupTopicsPage(driver);
@@ -192,8 +196,7 @@ public class GroupMainPage extends PageBase {
    * @return строка с названием
    */
   public String getGroupName(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_NAME), 5, 500))
-      Assert.fail("Не удалось получить название группы");
+    waitForVisibility(GROUP_NAME, "Не удалось получить название группы");
     return driver.findElement(GROUP_NAME).getText();
   }
 
@@ -202,8 +205,7 @@ public class GroupMainPage extends PageBase {
    * @return строка с категорией
    */
   public String getGroupCategory(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_CATEGORY), 5, 500))
-      Assert.fail("Не удалось получить категорию группы");
+    waitForVisibility(GROUP_CATEGORY, "Не удалось получить категорию группы");
     return driver.findElement(GROUP_CATEGORY).getText();
   }
 
@@ -212,8 +214,7 @@ public class GroupMainPage extends PageBase {
    * @return строка со статусом
    */
   public String getUserStatus(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(MEMBER_STATUS), 5, 500))
-      Assert.fail("Не удалось получить статус пользователя");
+    waitForVisibility(MEMBER_STATUS, "Не удалось получить статус пользователя");
     return driver.findElement(MEMBER_STATUS).getText();
   }
 

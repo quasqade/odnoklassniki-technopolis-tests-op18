@@ -143,5 +143,10 @@ public abstract class PageBase {
     click(USER_PAGE_LINK);
     return new UserMainPage(driver);
   }
+
+  protected void waitForVisibility(By hideOwnerCheckbox, String s) {
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(hideOwnerCheckbox), 5, 500))
+      Assert.fail(s);
+  }
 }
 

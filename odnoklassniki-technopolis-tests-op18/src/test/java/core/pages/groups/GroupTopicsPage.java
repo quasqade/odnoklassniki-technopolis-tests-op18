@@ -4,11 +4,8 @@ import core.pages.PageBase;
 import core.transformers.TopicListTransformer;
 import core.wrappers.topics.GroupTopicWrapper;
 import java.util.List;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Представляет страницу Темы в группе
@@ -24,9 +21,7 @@ public class GroupTopicsPage extends PageBase {
 
   @Override
   protected void check() {
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(ACTIVE_TOPICS), 5, 500)) {
-      Assert.fail("Не удалось загрузить раздел Темы");
-    }
+    waitForVisibility(ACTIVE_TOPICS, "Не удалось загрузить раздел Темы");
   }
 
   /**

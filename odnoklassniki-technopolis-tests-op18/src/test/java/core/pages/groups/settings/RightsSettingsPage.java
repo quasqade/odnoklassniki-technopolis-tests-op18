@@ -39,10 +39,7 @@ public class RightsSettingsPage extends AbstractSettingsPage {
    * @param frequency частота текстом
    */
   public void selectJoinNotificationFrequency(String frequency) {
-    if (!explicitWait(
-        ExpectedConditions.visibilityOfElementLocated(NOTIFICATION_FREQUENCY_DROPDOWN), 5, 500)) {
-      Assert.fail("Не удалось получить параметры частоты оповещения");
-    }
+    waitForVisibility(NOTIFICATION_FREQUENCY_DROPDOWN, "Не удалось получить параметры частоты оповещения");
     Select select = new Select(driver.findElement(NOTIFICATION_FREQUENCY_DROPDOWN));
     try {
       select.selectByVisibleText(frequency);
@@ -56,8 +53,7 @@ public class RightsSettingsPage extends AbstractSettingsPage {
    * @return значение выпадающего списка
    */
   public boolean canMembersSuggestTopics(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(SUGGESTED_TOPICS), 5, 500))
-      Assert.fail("Не удалось обнаружить настройку предлагаемых тем");
+    waitForVisibility(SUGGESTED_TOPICS, "Не удалось обнаружить настройку предлагаемых тем");
     Select select = new Select(driver.findElement(SUGGESTED_TOPICS));
     return !select.getFirstSelectedOption().getAttribute("value").equals("off");
   }
@@ -67,8 +63,7 @@ public class RightsSettingsPage extends AbstractSettingsPage {
    * @return  строка со значением, выбранным в выпадающем списке
    */
   public String whatPhotosAreShownInFeed(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(SHOW_PHOTOS_IN_FEED), 5, 500))
-      Assert.fail("Не удалось обнаружить настройку показа фото в ленте");
+    waitForVisibility(SHOW_PHOTOS_IN_FEED, "Не удалось обнаружить настройку показа фото в ленте");
     Select select = new Select(driver.findElement(SHOW_PHOTOS_IN_FEED));
     return select.getFirstSelectedOption().getText();
   }

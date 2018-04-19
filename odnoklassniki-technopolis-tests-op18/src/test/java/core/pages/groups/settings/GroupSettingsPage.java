@@ -1,6 +1,5 @@
 package core.pages.groups.settings;
 
-import core.pages.PageBase;
 import core.pages.groups.GroupPrivacy;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -83,8 +82,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
    * @return строка с типом
    */
   public String getType(){
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(TYPE), 5 , 500))
-      Assert.fail("Не удалось получить тип группы на странице настроек");
+    waitForVisibility(TYPE, "Не удалось получить тип группы на странице настроек");
     return driver.findElement(TYPE).getText();
   }
 
