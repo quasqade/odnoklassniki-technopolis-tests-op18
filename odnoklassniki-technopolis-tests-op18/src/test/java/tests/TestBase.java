@@ -16,6 +16,7 @@ public abstract class TestBase {
   protected WebDriver driver;
   private List<WebDriver> drivers = new ArrayList<>();
   private StringBuffer verificationErrors = new StringBuffer();
+  private String rememberedUrl;
 
   @Before
   public void setUp() throws Exception {
@@ -60,4 +61,18 @@ public abstract class TestBase {
     else
       this.driver = driver;
   }
+
+  public void rememberUrl(){
+    rememberedUrl = driver.getCurrentUrl();
+  }
+
+  public void goToRememberedUrl(){
+    if (rememberedUrl!=null)
+    driver.navigate().to(rememberedUrl);
+  }
+
+  public void refresh(){
+    driver.navigate().refresh();
+  }
+
 }

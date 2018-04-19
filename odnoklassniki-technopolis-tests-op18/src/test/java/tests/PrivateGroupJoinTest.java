@@ -33,7 +33,7 @@ public class PrivateGroupJoinTest extends TestBase {
   public void testCase() throws Exception {
 
     //test
-    String groupUrl = driver.getCurrentUrl(); //записываем адрес страницы, чтобы потом возвращаться
+    rememberUrl(); //записываем адрес страницы, чтобы потом возвращаться
     WebDriver firstDriver = driver;
     GroupMainPage gmp = new GroupMainPage(driver);
     gmp.openOtherSections();
@@ -50,14 +50,14 @@ public class PrivateGroupJoinTest extends TestBase {
     WebDriver secondDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
     new UserMainPage(driver); //чтобы дождаться загрузки страницы
-    driver.navigate().to(groupUrl);
+    goToRememberedUrl();
     gmp = new GroupMainPage(driver);
     gmp.joinGroup();
     Assert.assertTrue(gmp.isInvitationPending());
 
     //первый пользователь
     switchDriver(firstDriver);
-    driver.navigate().to(groupUrl);
+    goToRememberedUrl(); //TODO заменить на переход по клику
     gmp = new GroupMainPage(driver);
     Assert.assertTrue(gmp.getAmountOfPendingRequests() > 0);
     int members = gmp.getAmountOfMembers();
@@ -66,7 +66,7 @@ public class PrivateGroupJoinTest extends TestBase {
 
     //второй пользователь
     switchDriver(secondDriver);
-    driver.navigate().refresh();
+    refresh();
 
     //conditions
     Assert.assertTrue(new GroupMainPage(driver).isMember());

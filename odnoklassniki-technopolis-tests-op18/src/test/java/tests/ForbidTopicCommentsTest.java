@@ -10,6 +10,7 @@ import core.wrappers.topics.GroupTopicWrapper;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 
@@ -24,29 +25,27 @@ public class ForbidTopicCommentsTest extends TestBase {
   private static final String TOPIC_TEXT = "Тест запрета комментариев";
   private static final String COMMENT_TEXT = "Тестовый комментарий";
 
-  private static String groupUrl;
+  private static WebDriver firstDriver, secondDriver;
+
 
   @Before
   public void preconditions() {
+    firstDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
     GroupMainPage gmp = GroupHelper.createPublicPage(driver, GROUP_NAME);
-    groupUrl = driver.getCurrentUrl();
+    rememberUrl();
 
-    stop();
     init();
+    secondDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
     new UserMainPage(driver); //дождаться загрузки страницы
-    driver.navigate().to(groupUrl);
+    goToRememberedUrl();
     gmp = new GroupMainPage(driver);
     Assert.assertFalse(gmp.isMember(), "Пользователь уже состоит в группе");
     gmp.joinGroup();
     Assert.assertTrue(gmp.isMember(), "Не удалось вступить в группу");
 
-    stop();
-    init();
-    new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
-    new UserMainPage(driver); //дождаться загрузки страницы
-    driver.navigate().to(groupUrl);
+    switchDriver(firstDriver);
   }
 
   @Test
@@ -58,17 +57,14 @@ public class ForbidTopicCommentsTest extends TestBase {
     Assert.assertEquals(firstTopic.getText(), TOPIC_TEXT);
     Assert.assertTrue(firstTopic.areCommentsAllowed(), "Комментарии уже запрещены");
     firstTopic.forbidComments();
-    driver.navigate().refresh(); //можно напихать ожиданий перед сборкой тем но там сложно угадать когда новые а когда старые
+    refresh(); //можно напихать ожиданий перед сборкой тем но там сложно угадать когда новые а когда старые
     gtp.collectTopics();
     firstTopic = gtp.getGroupTopics().get(0);
     Assert.assertFalse(firstTopic.areCommentsAllowed(), "Не удалось запретить комментарии");
 
     //второй пользователь
-    stop();
-    init();
-    new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
-    new UserMainPage(driver); //дождаться загрузки страницы
-    driver.navigate().to(groupUrl);
+    switchDriver(secondDriver);
+    refresh();
     gmp = new GroupMainPage(driver);
     gtp = gmp.goToTopics();
     gtp.collectTopics();
