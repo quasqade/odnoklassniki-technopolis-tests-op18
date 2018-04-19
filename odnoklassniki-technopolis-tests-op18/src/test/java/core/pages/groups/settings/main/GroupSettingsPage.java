@@ -13,53 +13,63 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class GroupSettingsPage extends AbstractSettingsPage {
 
-  private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
-  private static final By TYPE = By
-      .xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
-  private static final By CHANGE_TYPE_CONFIRM_POPUP = By
-      .xpath("//*[contains(@id, 'GroupChangeType')]");
-  private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
-  private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
-  private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
-  private static final By BACK_MAIN_GROUP_PAGE = By
-      .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
+    private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
+    private static final By TYPE = By
+            .xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
+    private static final By CHANGE_TYPE_CONFIRM_POPUP = By
+            .xpath("//*[contains(@id, 'GroupChangeType')]");
+    private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
+    private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
+    private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
+    private static final By NAME_GROUP_IN_SETTINGS = By
+            .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
+    private static final By BACK_MAIN_GROUP_PAGE = By
+            .xpath(".//div[@class='stub-img stub-group-business-24 stub-img__24']//parent::*");
 
-  public GroupSettingsPage(WebDriver driver) {
-    super(driver);
-  }
+    public GroupSettingsPage(WebDriver driver) {
+        super(driver);
+    }
 
-  /**
-   * Меняет название группы в форме имени
-   */
-  public void changeName(String newName) {
-    type(newName, CHANGE_NAME_FIELD);
-  }
 
-  /**
-   * Получаем название группы из формы имени
-   */
-  public String getNameFromField() {
-    return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
-  }
+    /**
+     * Переходим на главную страницу группы
+     */
+    public void toGroupMainPage() {
+        click(NAME_GROUP_IN_SETTINGS);
+    }
 
-  /**
-   * Получаем название группы из поля
-   */
-  public String getNameFromBackLink() {
-    return driver.findElement(BACK_MAIN_GROUP_PAGE).getText();
-  }
+    /**
+     * Меняет название группы в форме имени
+     */
+    public void changeName(String newName) {
+        type(newName, CHANGE_NAME_FIELD);
+    }
 
-  /**
-   * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
-   */
-  public void changeType() {
-    click(CHANGE_TYPE);
-    new WebDriverWait(driver, 5)
-        .until(ExpectedConditions.visibilityOfElementLocated(CHANGE_TYPE_CONFIRM_POPUP));
-    click(FORM_CONFIRM);
-    updateLastTip();
-    Assert.assertEquals("Тип группы изменен", getLastTipText());
-  }
+    /**
+     * Получаем название группы из формы имени
+     */
+    public String getNameFromField() {
+        return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
+    }
+
+    /**
+     * Получаем название группы из поля
+     */
+    public String getNameFromBackLink() {
+        return driver.findElement(NAME_GROUP_IN_SETTINGS).getText();
+    }
+
+    /**
+     * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
+     */
+    public void changeType() {
+        click(CHANGE_TYPE);
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOfElementLocated(CHANGE_TYPE_CONFIRM_POPUP));
+        click(FORM_CONFIRM);
+        updateLastTip();
+        Assert.assertEquals("Тип группы изменен", getLastTipText());
+    }
 
   /**
    * Выбирает в списке типов группы (не страницы) тип, отвечающий за доступ

@@ -38,7 +38,8 @@ public class ChangeGroupNameTest extends TestBase {
     //проверяем, что название соответствует новоуму названию
     Assert.assertEquals(newName, groupSettingsPage.getNameFromField());
     Assert.assertEquals(newName, groupSettingsPage.getNameFromBackLink());
-    //тут еще какие-то проверки
+    groupSettingsPage.toGroupMainPage();
+    Assert.assertEquals(newName, groupMainPage.getGroupName());
 
   }
 
