@@ -3,7 +3,6 @@ package core.pages.groups.settings.rights;
 import core.pages.groups.settings.AbstractSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -65,7 +64,8 @@ public class RightsSettingsPage extends AbstractSettingsPage {
   public ShowPhotosInFeedOption whatPhotosAreShownInFeed() {
     waitForVisibility(SHOW_PHOTOS_IN_FEED, "Не удалось обнаружить настройку показа фото в ленте");
     Select select = new Select(driver.findElement(SHOW_PHOTOS_IN_FEED));
-    ShowPhotosInFeedOption option = ShowPhotosInFeedOption.valueOf(select.getFirstSelectedOption().getAttribute("value"));
+    ShowPhotosInFeedOption option = ShowPhotosInFeedOption
+        .valueOf(select.getFirstSelectedOption().getAttribute("value"));
     return option;
   }
 

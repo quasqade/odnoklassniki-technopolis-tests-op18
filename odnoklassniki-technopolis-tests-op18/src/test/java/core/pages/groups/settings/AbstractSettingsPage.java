@@ -20,66 +20,66 @@ public abstract class AbstractSettingsPage extends PageBase {
   private static final By SAVE_SETTINGS = By.xpath("//*[@name='button_save_settings']");
   private static final By TIP = By
       .xpath("//*[@data-module='NonBlockingTip']//*[@class='tip_cnt']//*");
-  private String lastTipText = "NO TIP";
   private static final By NAME_GROUP_IN_SETTINGS = By
       .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
+  private String lastTipText = "NO TIP";
 
-    public AbstractSettingsPage(WebDriver driver) {
-        super(driver);
+  public AbstractSettingsPage(WebDriver driver) {
+    super(driver);
+  }
+
+  @Override
+  protected void check() {
+    new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(NAV_PANEL));
+  }
+
+  /**
+   * Нажимает подтверждение внесенных изменений и обновляет последнее уведомление
+   */
+  public void confirmSettings() {
+    click(SAVE_SETTINGS);
+    updateLastTip();
+    Assert.assertEquals("Настройки сохранены", getLastTipText());
+  }
+
+  /**
+   * Обновляет последнее всплывающее уведомление (используйте getLastTipText() чтобы его получить)
+   */
+  //TODO вернуть значение
+  protected void updateLastTip() {
+    try {
+      new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(TIP));
+      lastTipText = driver.findElement(TIP).getText();
+    } catch (TimeoutException te) {
+      lastTipText = "NO TIP";
     }
 
-    @Override
-    protected void check() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(NAV_PANEL));
+    //ждем, пока исчезнет уведомление, иначе новые уведомления не будут появляться
+    try {
+      new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(TIP));
+    } catch (TimeoutException te) {
+      Assert.fail("Settings tip is not disappearing");
     }
+  }
 
-    /**
-     * Нажимает подтверждение внесенных изменений и обновляет последнее уведомление
-     */
-    public void confirmSettings() {
-        click(SAVE_SETTINGS);
-        updateLastTip();
-        Assert.assertEquals("Настройки сохранены", getLastTipText());
-    }
+  /**
+   * Возвращает текст последнего всплывающего уведомления
+   *
+   * @return текст уведомления
+   */
+  protected String getLastTipText() {
+    return lastTipText;
+  }
 
-    /**
-     * Обновляет последнее всплывающее уведомление (используйте getLastTipText() чтобы его получить)
-     */
-    //TODO вернуть значение
-    protected void updateLastTip() {
-        try {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(TIP));
-            lastTipText = driver.findElement(TIP).getText();
-        } catch (TimeoutException te) {
-            lastTipText = "NO TIP";
-        }
-
-        //ждем, пока исчезнет уведомление, иначе новые уведомления не будут появляться
-        try {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(TIP));
-        } catch (TimeoutException te) {
-            Assert.fail("Settings tip is not disappearing");
-        }
-    }
-
-    /**
-     * Возвращает текст последнего всплывающего уведомления
-     *
-     * @return текст уведомления
-     */
-    protected String getLastTipText() {
-        return lastTipText;
-    }
-
-    /**
-     * Переходит на страницу Управление через левую навигацию
-     *
-     * @return страница Управление
-     */
-    public RightsSettingsPage clickRights() {
-        click(NAV_RIGHTS);
-        return new RightsSettingsPage(driver);
-    }
+  /**
+   * Переходит на страницу Управление через левую навигацию
+   *
+   * @return страница Управление
+   */
+  public RightsSettingsPage clickRights() {
+    click(NAV_RIGHTS);
+    return new RightsSettingsPage(driver);
+  }
 
   public ModeratorsSettingsPage clickModerators() {
     click(NAV_MODERATORS);
@@ -90,13 +90,13 @@ public abstract class AbstractSettingsPage extends PageBase {
    * Переходим на главную страницу группы
    */
   public void toGroupMainPage() {
-      click(NAME_GROUP_IN_SETTINGS);
+    click(NAME_GROUP_IN_SETTINGS);
   }
 
   /**
    * Получаем название группы из поля
    */
   public String getNameFromBackLink() {
-      return driver.findElement(NAME_GROUP_IN_SETTINGS).getText();
+    return driver.findElement(NAME_GROUP_IN_SETTINGS).getText();
   }
 }

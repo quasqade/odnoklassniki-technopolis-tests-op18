@@ -13,47 +13,47 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class GroupSettingsPage extends AbstractSettingsPage {
 
-    private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
-    private static final By TYPE = By
-            .xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
-    private static final By CHANGE_TYPE_CONFIRM_POPUP = By
-            .xpath("//*[contains(@id, 'GroupChangeType')]");
-    private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
-    private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
-    private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
-    private static final By BACK_MAIN_GROUP_PAGE = By
-            .xpath(".//div[@class='stub-img stub-group-business-24 stub-img__24']//parent::*");
+  private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
+  private static final By TYPE = By
+      .xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
+  private static final By CHANGE_TYPE_CONFIRM_POPUP = By
+      .xpath("//*[contains(@id, 'GroupChangeType')]");
+  private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
+  private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
+  private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
+  private static final By BACK_MAIN_GROUP_PAGE = By
+      .xpath(".//div[@class='stub-img stub-group-business-24 stub-img__24']//parent::*");
 
-    public GroupSettingsPage(WebDriver driver) {
-        super(driver);
-    }
+  public GroupSettingsPage(WebDriver driver) {
+    super(driver);
+  }
 
-
-  /**
-     * Меняет название группы в форме имени
-     */
-    public void changeName(String newName) {
-        type(newName, CHANGE_NAME_FIELD);
-    }
-
-    /**
-     * Получаем название группы из формы имени
-     */
-    public String getNameFromField() {
-        return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
-    }
 
   /**
-     * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
-     */
-    public void changeType() {
-        click(CHANGE_TYPE);
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(CHANGE_TYPE_CONFIRM_POPUP));
-        click(FORM_CONFIRM);
-        updateLastTip();
-        Assert.assertEquals("Тип группы изменен", getLastTipText());
-    }
+   * Меняет название группы в форме имени
+   */
+  public void changeName(String newName) {
+    type(newName, CHANGE_NAME_FIELD);
+  }
+
+  /**
+   * Получаем название группы из формы имени
+   */
+  public String getNameFromField() {
+    return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
+  }
+
+  /**
+   * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
+   */
+  public void changeType() {
+    click(CHANGE_TYPE);
+    new WebDriverWait(driver, 5)
+        .until(ExpectedConditions.visibilityOfElementLocated(CHANGE_TYPE_CONFIRM_POPUP));
+    click(FORM_CONFIRM);
+    updateLastTip();
+    Assert.assertEquals("Тип группы изменен", getLastTipText());
+  }
 
   /**
    * Выбирает в списке типов группы (не страницы) тип, отвечающий за доступ
@@ -74,7 +74,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
     waitForVisibility(TYPE, "Не удалось получить тип группы на странице настроек");
     GroupType type;
     String typeString = driver.findElement(TYPE).getText();
-    switch (typeString){
+    switch (typeString) {
       case "Страница":
         type = GroupType.PAGE;
         break;
@@ -82,9 +82,9 @@ public class GroupSettingsPage extends AbstractSettingsPage {
         type = GroupType.EVENT;
       case "Группа":
         type = GroupType.GROUP;
-        default:
-          Assert.fail("Неизвестный тип группы: " + typeString);
-          type = null;
+      default:
+        Assert.fail("Неизвестный тип группы: " + typeString);
+        type = null;
     }
     return type;
   }
