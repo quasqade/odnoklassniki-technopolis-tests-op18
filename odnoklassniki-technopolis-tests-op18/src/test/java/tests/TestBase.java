@@ -55,22 +55,35 @@ public abstract class TestBase {
     }
   }
 
+  /**
+   * Переключает текущий драйвер на другой драйвер (который сперва должен быть инициализирован вызовом init()
+   * @param driver драйвер, на который нужно перейти
+   */
   public void switchDriver(WebDriver driver){
     if (!drivers.contains(driver))
-      fail("Попытка остановить не инициализированный драйвер");
+      fail("Попытка переключиться на не инициализированный драйвер");
     else
       this.driver = driver;
   }
 
+  /**
+   * Запоминает адрес текущей страницы, чтобы потом перейти
+   */
   public void rememberUrl(){
     rememberedUrl = driver.getCurrentUrl();
   }
 
+  /**
+   * Переходит по запомненному адресу
+   */
   public void goToRememberedUrl(){
     if (rememberedUrl!=null)
     driver.navigate().to(rememberedUrl);
   }
 
+  /**
+   * Обновляет страницу текущего драйвера
+   */
   public void refresh(){
     driver.navigate().refresh();
   }

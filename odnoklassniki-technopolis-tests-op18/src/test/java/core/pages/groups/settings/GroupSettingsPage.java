@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class GroupSettingsPage extends AbstractSettingsPage {
 
   private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
+  private static final By TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
   private static final By CHANGE_TYPE_CONFIRM_POPUP = By.xpath("//*[contains(@id, 'GroupChangeType')]");
   private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
   private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
@@ -36,7 +37,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
    * Получаем название группы из формы имени
    */
   public String getNameFromField(){
-    return driver.findElement(CHANGE_NAME_FIELD).getText();
+    return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
   }
 
   /**
@@ -75,6 +76,16 @@ public class GroupSettingsPage extends AbstractSettingsPage {
         select.selectByValue("BY_MEMBER_INVITATION");
         break;
     }
+  }
+
+  /**
+   * Возвращает тип группы
+   * @return строка с типом
+   */
+  public String getType(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(TYPE), 5 , 500))
+      Assert.fail("Не удалось получить тип группы на странице настроек");
+    return driver.findElement(TYPE).getText();
   }
 
 }

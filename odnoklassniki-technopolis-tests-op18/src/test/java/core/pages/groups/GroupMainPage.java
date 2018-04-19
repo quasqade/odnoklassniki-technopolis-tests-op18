@@ -1,13 +1,11 @@
 package core.pages.groups;
 
 import core.pages.PageBase;
-import core.pages.UserMainPage;
 import core.pages.groups.settings.GroupSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -39,7 +37,10 @@ public class GroupMainPage extends PageBase {
       .xpath("//span[contains(@id, 'GroupJoinRequests')]");
   private final static By MEMBER_COUNTER = By.xpath("//*[@id='membersCountEl']");
   private final static By MAIN_DROPDOWN = By.xpath("//*[contains(@class, 'primary-dropdown')]");
+  private final static By MEMBER_STATUS = By.xpath("//*[contains(@class, 'primary-dropdown')]//*[contains(@class, 'button')]");
   private final static By NAV_TOPICS = By.xpath("//*[contains(@data-l, 'Group_Forum')]");
+  private final static By GROUP_NAME = By.xpath("//*[@class='mctc_name_tx']");
+  private final static By GROUP_CATEGORY = By.xpath("//*[@class='group-info_category']");
 
   public GroupMainPage(WebDriver driver) {
     super(driver);
@@ -184,6 +185,36 @@ public class GroupMainPage extends PageBase {
   public GroupTopicsPage goToTopics(){
     click(NAV_TOPICS);
     return new GroupTopicsPage(driver);
+  }
+
+  /**
+   * Возвращает название группы из панели информации
+   * @return строка с названием
+   */
+  public String getGroupName(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_NAME), 5, 500))
+      Assert.fail("Не удалось получить название группы");
+    return driver.findElement(GROUP_NAME).getText();
+  }
+
+  /**
+   * Возвращает категорию группы из панели информации
+   * @return строка с категорией
+   */
+  public String getGroupCategory(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_CATEGORY), 5, 500))
+      Assert.fail("Не удалось получить категорию группы");
+    return driver.findElement(GROUP_CATEGORY).getText();
+  }
+
+  /**
+   * Возвращает статус пользователя из кнопки под логотипом
+   * @return строка со статусом
+   */
+  public String getUserStatus(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(MEMBER_STATUS), 5, 500))
+      Assert.fail("Не удалось получить статус пользователя");
+    return driver.findElement(MEMBER_STATUS).getText();
   }
 
 }

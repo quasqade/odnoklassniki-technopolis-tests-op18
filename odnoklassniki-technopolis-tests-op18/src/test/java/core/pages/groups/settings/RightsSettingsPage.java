@@ -16,6 +16,9 @@ public class RightsSettingsPage extends AbstractSettingsPage {
   private static final By RIGHTS_FORM = By.xpath("//*[contains(@id, 'GroupRightsForm')]");
   private static final By NOTIFICATION_FREQUENCY_DROPDOWN = By
       .xpath("//*[contains(@id, 'joinRequestNotification')]");
+  private static final By SUGGESTED_TOPICS = By.xpath("//*[contains(@id, 'SuggestedTopics')]");
+  private static final By SHOW_PHOTOS_IN_FEED = By.xpath("//*[contains(@id, 'ShowPhotosInFeed')]");
+
 
   public RightsSettingsPage(WebDriver driver) {
     super(driver);
@@ -46,6 +49,28 @@ public class RightsSettingsPage extends AbstractSettingsPage {
     } catch (NoSuchElementException nse) {
       Assert.fail("Неизвестная частота получения оповещения: " + frequency);
     }
+  }
+
+  /**
+   * Проверяет, могут ли участники предлагать темы
+   * @return значение выпадающего списка
+   */
+  public boolean canMembersSuggestTopics(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(SUGGESTED_TOPICS), 5, 500))
+      Assert.fail("Не удалось обнаружить настройку предлагаемых тем");
+    Select select = new Select(driver.findElement(SUGGESTED_TOPICS));
+    return !select.getFirstSelectedOption().getAttribute("value").equals("off");
+  }
+
+  /**
+   * Проверяет, какие фото показываются в ленте
+   * @return  строка со значением, выбранным в выпадающем списке
+   */
+  public String whatPhotosAreShownInFeed(){
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(SHOW_PHOTOS_IN_FEED), 5, 500))
+      Assert.fail("Не удалось обнаружить настройку показа фото в ленте");
+    Select select = new Select(driver.findElement(SHOW_PHOTOS_IN_FEED));
+    return select.getFirstSelectedOption().getText();
   }
 
 }
