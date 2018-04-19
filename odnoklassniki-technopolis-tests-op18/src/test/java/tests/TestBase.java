@@ -4,7 +4,10 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.exec.util.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -90,6 +93,10 @@ public abstract class TestBase {
    */
   public void refresh() {
     driver.navigate().refresh();
+  }
+
+  protected static String getRandomId(){
+    return UUID.randomUUID().toString();
   }
 
 }

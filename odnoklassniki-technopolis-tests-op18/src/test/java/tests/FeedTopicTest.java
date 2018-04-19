@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class FeedTopicTest extends TestBase {
 
-  private static final String GROUP_NAME = "AddTopicTestGroup";
+  private static final String GROUP_NAME = getRandomId();
   private static final String TOPIC_TEXT = "Тест доставки ленты";
   private static final TestBot USER_ACCOUNT = new TestBot("QA18testbot78", "QA18testbot");
 

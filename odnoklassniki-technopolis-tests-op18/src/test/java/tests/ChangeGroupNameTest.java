@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class ChangeGroupNameTest extends TestBase {
 
-  private static final String GROUP_NAME = "Test group";
+  private static final String GROUP_NAME = getRandomId();
   private static final TestBot USER_ACCOUNT = new TestBot("QA18testbot80", "QA18testbot");
 
   @Before
