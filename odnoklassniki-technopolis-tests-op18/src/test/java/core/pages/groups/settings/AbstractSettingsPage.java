@@ -25,62 +25,62 @@ public abstract class AbstractSettingsPage extends PageBase {
   private static final By NAME_GROUP_IN_SETTINGS = By
       .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
 
-  public AbstractSettingsPage(WebDriver driver) {
-    super(driver);
-  }
-
-  @Override
-  protected void check() {
-    new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(NAV_PANEL));
-  }
-
-  /**
-   * Нажимает подтверждение внесенных изменений и обновляет последнее уведомление
-   */
-  public void confirmSettings() {
-    click(SAVE_SETTINGS);
-    updateLastTip();
-    Assert.assertEquals("Настройки сохранены", getLastTipText());
-  }
-
-  /**
-   * Обновляет последнее всплывающее уведомление (используйте getLastTipText() чтобы его получить)
-   */
-  //TODO вернуть значение
-  protected void updateLastTip() {
-    try {
-      new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(TIP));
-      lastTipText = driver.findElement(TIP).getText();
-    } catch (TimeoutException te) {
-      lastTipText = "NO TIP";
+    public AbstractSettingsPage(WebDriver driver) {
+        super(driver);
     }
 
-    //ждем, пока исчезнет уведомление, иначе новые уведомления не будут появляться
-    try {
-      new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(TIP));
-    } catch (TimeoutException te) {
-      Assert.fail("Settings tip is not disappearing");
+    @Override
+    protected void check() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(NAV_PANEL));
     }
-  }
 
-  /**
-   * Возвращает текст последнего всплывающего уведомления
-   *
-   * @return текст уведомления
-   */
-  protected String getLastTipText() {
-    return lastTipText;
-  }
+    /**
+     * Нажимает подтверждение внесенных изменений и обновляет последнее уведомление
+     */
+    public void confirmSettings() {
+        click(SAVE_SETTINGS);
+        updateLastTip();
+        Assert.assertEquals("Настройки сохранены", getLastTipText());
+    }
 
-  /**
-   * Переходит на страницу Управление через левую навигацию
-   *
-   * @return страница Управление
-   */
-  public RightsSettingsPage clickRights() {
-    click(NAV_RIGHTS);
-    return new RightsSettingsPage(driver);
-  }
+    /**
+     * Обновляет последнее всплывающее уведомление (используйте getLastTipText() чтобы его получить)
+     */
+    //TODO вернуть значение
+    protected void updateLastTip() {
+        try {
+            new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(TIP));
+            lastTipText = driver.findElement(TIP).getText();
+        } catch (TimeoutException te) {
+            lastTipText = "NO TIP";
+        }
+
+        //ждем, пока исчезнет уведомление, иначе новые уведомления не будут появляться
+        try {
+            new WebDriverWait(driver, 10).until(ExpectedConditions.invisibilityOfElementLocated(TIP));
+        } catch (TimeoutException te) {
+            Assert.fail("Settings tip is not disappearing");
+        }
+    }
+
+    /**
+     * Возвращает текст последнего всплывающего уведомления
+     *
+     * @return текст уведомления
+     */
+    protected String getLastTipText() {
+        return lastTipText;
+    }
+
+    /**
+     * Переходит на страницу Управление через левую навигацию
+     *
+     * @return страница Управление
+     */
+    public RightsSettingsPage clickRights() {
+        click(NAV_RIGHTS);
+        return new RightsSettingsPage(driver);
+    }
 
   public ModeratorsSettingsPage clickModerators() {
     click(NAV_MODERATORS);
