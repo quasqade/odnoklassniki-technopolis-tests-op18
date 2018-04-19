@@ -90,9 +90,10 @@ public class GroupMainPage extends PageBase {
   }
 
   /**
-   * Открывает настройки группы в выпадающем списке "Ещё"
+   * Открывает выпадающий список Ещё и кликает настройки группы в выпадающем списке "Ещё"
    */
   public GroupSettingsPage openGroupSettings() {
+    openOtherSections();
     click(DROPDOWN_SETTINGS);
     return new GroupSettingsPage(driver);
   }

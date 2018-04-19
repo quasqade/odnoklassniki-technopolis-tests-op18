@@ -1,6 +1,7 @@
 package core.pages.groups.settings;
 
 import core.pages.PageBase;
+import core.pages.groups.settings.main.GroupSettingsPage;
 import core.pages.groups.settings.rights.RightsSettingsPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -21,6 +22,8 @@ public abstract class AbstractSettingsPage extends PageBase {
   private static final By TIP = By
       .xpath("//*[@data-module='NonBlockingTip']//*[@class='tip_cnt']//*");
   private String lastTipText = "NO TIP";
+  private static final By NAME_GROUP_IN_SETTINGS = By
+      .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
 
   public AbstractSettingsPage(WebDriver driver) {
     super(driver);
@@ -82,5 +85,19 @@ public abstract class AbstractSettingsPage extends PageBase {
   public ModeratorsSettingsPage clickModerators() {
     click(NAV_MODERATORS);
     return new ModeratorsSettingsPage(driver);
+  }
+
+  /**
+   * Переходим на главную страницу группы
+   */
+  public void toGroupMainPage() {
+      click(NAME_GROUP_IN_SETTINGS);
+  }
+
+  /**
+   * Получаем название группы из поля
+   */
+  public String getNameFromBackLink() {
+      return driver.findElement(NAME_GROUP_IN_SETTINGS).getText();
   }
 }

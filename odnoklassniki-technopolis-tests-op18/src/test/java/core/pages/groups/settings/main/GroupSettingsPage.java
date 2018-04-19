@@ -21,8 +21,6 @@ public class GroupSettingsPage extends AbstractSettingsPage {
     private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
     private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
     private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
-    private static final By NAME_GROUP_IN_SETTINGS = By
-            .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
     private static final By BACK_MAIN_GROUP_PAGE = By
             .xpath(".//div[@class='stub-img stub-group-business-24 stub-img__24']//parent::*");
 
@@ -31,14 +29,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
     }
 
 
-    /**
-     * Переходим на главную страницу группы
-     */
-    public void toGroupMainPage() {
-        click(NAME_GROUP_IN_SETTINGS);
-    }
-
-    /**
+  /**
      * Меняет название группы в форме имени
      */
     public void changeName(String newName) {
@@ -52,14 +43,7 @@ public class GroupSettingsPage extends AbstractSettingsPage {
         return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
     }
 
-    /**
-     * Получаем название группы из поля
-     */
-    public String getNameFromBackLink() {
-        return driver.findElement(NAME_GROUP_IN_SETTINGS).getText();
-    }
-
-    /**
+  /**
      * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
      */
     public void changeType() {

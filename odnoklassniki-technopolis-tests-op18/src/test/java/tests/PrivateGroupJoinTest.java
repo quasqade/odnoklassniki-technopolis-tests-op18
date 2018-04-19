@@ -37,7 +37,6 @@ public class PrivateGroupJoinTest extends TestBase {
     rememberUrl(); //записываем адрес страницы, чтобы потом возвращаться
     WebDriver firstDriver = driver;
     GroupMainPage gmp = new GroupMainPage(driver);
-    gmp.openOtherSections();
     GroupSettingsPage gsp = gmp.openGroupSettings();
     gsp.changeType();
     gsp.changePrivacy(GroupPrivacy.BY_MEMBER_INVITATION_AND_REQUEST);
@@ -58,7 +57,7 @@ public class PrivateGroupJoinTest extends TestBase {
 
     //первый пользователь
     switchDriver(firstDriver);
-    goToRememberedUrl(); //TODO заменить на переход по клику
+    rsp.toGroupMainPage();
     gmp = new GroupMainPage(driver);
     Assert.assertTrue(gmp.getAmountOfPendingRequests() > 0);
     int members = gmp.getAmountOfMembers();
