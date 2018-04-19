@@ -15,6 +15,7 @@ import org.testng.Assert;
  * Проверяется создание публичной страницы
  */
 public class CreatePublicPageTest extends TestBase {
+
   private static final String PAGE_NAME = "Тестовая страница";
   private static final String PAGE_DESCRIPTION = "Тестовое описание";
   private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
@@ -35,7 +36,8 @@ public class CreatePublicPageTest extends TestBase {
     Assert.assertEquals(gsp.getNameFromField(), PAGE_NAME);
     Assert.assertEquals(gsp.getType(), "Страница");
     RightsSettingsPage rsp = gsp.clickRights();
-    Assert.assertFalse(rsp.canMembersSuggestTopics(), "Участники не должны предлагать темы по умолчанию");
+    Assert.assertFalse(rsp.canMembersSuggestTopics(),
+        "Участники не должны предлагать темы по умолчанию");
     Assert.assertEquals(rsp.whatPhotosAreShownInFeed(), "Показывать от администрации");
     ModeratorsSettingsPage msp = rsp.clickModerators();
     Assert.assertTrue(msp.areModeratorsHidden());

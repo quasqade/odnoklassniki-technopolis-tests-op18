@@ -10,7 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Содержит некоторые полезные методы для работы с драйвером не из страниц (скопипащено из PageBase)
+ * Содержит некоторые полезные методы для работы с драйвером не из страниц (скопипащено из
+ * PageBase)
  */
 public class DriverHelper {
 
@@ -25,7 +26,8 @@ public class DriverHelper {
   /**
    * Ожидание
    */
-  public static boolean explicitWait(WebDriver driver, final ExpectedCondition<?> condition, long maxCheckTimeInSeconds,
+  public static boolean explicitWait(WebDriver driver, final ExpectedCondition<?> condition,
+      long maxCheckTimeInSeconds,
       long millisecondsBetweenChecks) {
     Preconditions.checkNotNull(condition, "Condition must be not null");
     Preconditions.checkArgument(TimeUnit.MINUTES.toSeconds(3) > maxCheckTimeInSeconds,
@@ -60,7 +62,8 @@ public class DriverHelper {
    * @param maxCheckTimeInSeconds максимальное время проверки в секундах
    * @param millisecondsBetweenChecks интервал между проверками в милисекундах
    */
-  private static void checkConditionTimeouts(long maxCheckTimeInSeconds, long millisecondsBetweenChecks) {
+  private static void checkConditionTimeouts(long maxCheckTimeInSeconds,
+      long millisecondsBetweenChecks) {
     Preconditions
         .checkState(maxCheckTimeInSeconds > 0, "maximum check time in seconds must be not 0");
     Preconditions.checkState(millisecondsBetweenChecks > 0,

@@ -16,9 +16,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class PageBase {
 
+  private final static By USER_PAGE_LINK = By.xpath("//*[contains(@href, '/feed')]");
   protected final WebDriver driver;
   private boolean acceptNextAlert = true;
-  private final static By USER_PAGE_LINK = By.xpath("//*[contains(@href, '/feed')]");
 
   protected PageBase(WebDriver driver) {
     this.driver = driver;
@@ -39,7 +39,7 @@ public abstract class PageBase {
     driver.findElement(field_name).sendKeys(name);
   }
 
-  public void refreshWebPage(){
+  public void refreshWebPage() {
     driver.navigate().refresh();
   }
 
@@ -144,9 +144,16 @@ public abstract class PageBase {
     return new UserMainPage(driver);
   }
 
-  protected void waitForVisibility(By hideOwnerCheckbox, String s) {
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(hideOwnerCheckbox), 5, 500))
-      Assert.fail(s);
+  /**
+   * Ожидает видимости элемента по локатору, падает если не дожидается
+   *
+   * @param locator локатор искомого элемента
+   * @param errorMessage сообщение об ошибке, если элемент не найдётся
+   */
+  protected void waitForVisibility(By locator, String errorMessage) {
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(locator), 5, 500)) {
+      Assert.fail(errorMessage);
+    }
   }
 }
 

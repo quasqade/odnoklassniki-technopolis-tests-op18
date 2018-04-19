@@ -12,7 +12,8 @@ import org.openqa.selenium.WebDriver;
  */
 public class GroupTopicsPage extends PageBase {
 
-  private static final By ACTIVE_TOPICS =org.openqa.selenium.By.xpath("//*[contains(@data-l, 'Group_Forum') and contains(@class, 'Active')]");
+  private static final By ACTIVE_TOPICS = org.openqa.selenium.By
+      .xpath("//*[contains(@data-l, 'Group_Forum') and contains(@class, 'Active')]");
   private List<GroupTopicWrapper> groupTopics;
 
   protected GroupTopicsPage(WebDriver driver) {
@@ -27,23 +28,25 @@ public class GroupTopicsPage extends PageBase {
   /**
    * Собирает список тем с помощью трансформера
    */
-  public void collectTopics(){
+  public void collectTopics() {
     groupTopics = TopicListTransformer.collectTopics(driver);
   }
 
   /**
    * Возвращает список тем
+   *
    * @return список врапперов тем
    */
-  public List<GroupTopicWrapper> getGroupTopics(){
+  public List<GroupTopicWrapper> getGroupTopics() {
     return groupTopics;
   }
 
   /**
    * Запрещает комментарии на переданном топике
+   *
    * @param topic враппер топика
    */
-  public void forbidCommentsOnTopic(GroupTopicWrapper topic){
+  public void forbidCommentsOnTopic(GroupTopicWrapper topic) {
     topic.forbidComments();
   }
 

@@ -4,13 +4,13 @@ import core.pages.PageBase;
 import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
- * Представляет собой оверлей постинга комментариев (технически не страница, а враппер, но так удобнее обращаться к методам PageBase)
+ * Представляет собой оверлей постинга комментариев (технически не страница, а враппер, но так
+ * удобнее обращаться к методам PageBase)
  */
 public class CommentPostingOverlay extends PageBase {
 
@@ -20,12 +20,14 @@ public class CommentPostingOverlay extends PageBase {
       .xpath("//*[contains(@class, 'rich_input')]//*[@data-placeholder]");
   private static final By SUBMIT_COMMENT_SIMPLE = By.xpath("//*[@id='smplBtnId27']");
   private static final By SUBMIT_COMMENT_RICH = By.xpath("//*[@uid='sendComment']");
-  private static final By COMMENT_TEXT = By.xpath("//*[contains(@class, 'textWrap')]//*[contains(@id, 'hook')]");
+  private static final By COMMENT_TEXT = By
+      .xpath("//*[contains(@class, 'textWrap')]//*[contains(@id, 'hook')]");
 
   private boolean isSimpleInput;
 
   /**
    * Создает объект и определяет тип ввода (бывает простой и расширенный с разными локаторами)
+   *
    * @param driver драйвер
    */
   public CommentPostingOverlay(WebDriver driver) {
@@ -48,35 +50,35 @@ public class CommentPostingOverlay extends PageBase {
 
   /**
    * Возвращает число комментариев в оверлее
+   *
    * @return число комментариев
    */
-  public int getAmountOfComments(){
+  public int getAmountOfComments() {
     List<WebElement> commentElements = driver.findElements(COMMENT_TEXT);
     return commentElements.size();
   }
 
   /**
    * Возвращает текст последнего комментария
+   *
    * @return текст
    */
-  public String getLastCommentText(){
+  public String getLastCommentText() {
     List<WebElement> commentElements = driver.findElements(COMMENT_TEXT);
-    if (commentElements.size()==0){
+    if (commentElements.size() == 0) {
       return "Нет комментариев";
     }
-    return commentElements.get(commentElements.size()-1).getText();
+    return commentElements.get(commentElements.size() - 1).getText();
   }
 
   /**
    * Проверяет, активна ли кнопка отправки комментария
-   * @return
    */
-  public boolean areCommentsAllowed(){
+  public boolean areCommentsAllowed() {
     WebElement commentButton;
-    if (isSimpleInput){
+    if (isSimpleInput) {
       commentButton = driver.findElement(SUBMIT_COMMENT_SIMPLE);
-    }
-    else{
+    } else {
       commentButton = driver.findElement(SUBMIT_COMMENT_RICH);
     }
     return (commentButton.isDisplayed() && commentButton.isEnabled());

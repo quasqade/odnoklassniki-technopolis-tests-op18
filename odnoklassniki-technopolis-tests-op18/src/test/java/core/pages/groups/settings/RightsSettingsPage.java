@@ -39,7 +39,8 @@ public class RightsSettingsPage extends AbstractSettingsPage {
    * @param frequency частота текстом
    */
   public void selectJoinNotificationFrequency(String frequency) {
-    waitForVisibility(NOTIFICATION_FREQUENCY_DROPDOWN, "Не удалось получить параметры частоты оповещения");
+    waitForVisibility(NOTIFICATION_FREQUENCY_DROPDOWN,
+        "Не удалось получить параметры частоты оповещения");
     Select select = new Select(driver.findElement(NOTIFICATION_FREQUENCY_DROPDOWN));
     try {
       select.selectByVisibleText(frequency);
@@ -50,9 +51,10 @@ public class RightsSettingsPage extends AbstractSettingsPage {
 
   /**
    * Проверяет, могут ли участники предлагать темы
+   *
    * @return значение выпадающего списка
    */
-  public boolean canMembersSuggestTopics(){
+  public boolean canMembersSuggestTopics() {
     waitForVisibility(SUGGESTED_TOPICS, "Не удалось обнаружить настройку предлагаемых тем");
     Select select = new Select(driver.findElement(SUGGESTED_TOPICS));
     return !select.getFirstSelectedOption().getAttribute("value").equals("off");
@@ -60,9 +62,10 @@ public class RightsSettingsPage extends AbstractSettingsPage {
 
   /**
    * Проверяет, какие фото показываются в ленте
-   * @return  строка со значением, выбранным в выпадающем списке
+   *
+   * @return строка со значением, выбранным в выпадающем списке
    */
-  public String whatPhotosAreShownInFeed(){
+  public String whatPhotosAreShownInFeed() {
     waitForVisibility(SHOW_PHOTOS_IN_FEED, "Не удалось обнаружить настройку показа фото в ленте");
     Select select = new Select(driver.findElement(SHOW_PHOTOS_IN_FEED));
     return select.getFirstSelectedOption().getText();

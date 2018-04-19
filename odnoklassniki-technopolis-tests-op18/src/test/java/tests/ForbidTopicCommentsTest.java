@@ -49,7 +49,7 @@ public class ForbidTopicCommentsTest extends TestBase {
   }
 
   @Test
-  public void forbidCommentsTest(){
+  public void forbidCommentsTest() {
     GroupMainPage gmp = new GroupMainPage(driver);
     GroupTopicsPage gtp = gmp.createNewTopic(TOPIC_TEXT);
     gtp.collectTopics();
@@ -70,7 +70,8 @@ public class ForbidTopicCommentsTest extends TestBase {
     gtp.collectTopics();
     firstTopic = gtp.getGroupTopics().get(0);
     CommentPostingOverlay cpo = firstTopic.openComments();
-    Assert.assertFalse(cpo.areCommentsAllowed(),"Комментарии разрешены для пользователя при включенном запрете");
+    Assert.assertFalse(cpo.areCommentsAllowed(),
+        "Комментарии разрешены для пользователя при включенном запрете");
 
   }
 

@@ -14,12 +14,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class GroupSettingsPage extends AbstractSettingsPage {
 
   private static final By CHANGE_TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]");
-  private static final By TYPE = By.xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
-  private static final By CHANGE_TYPE_CONFIRM_POPUP = By.xpath("//*[contains(@id, 'GroupChangeType')]");
+  private static final By TYPE = By
+      .xpath("//*[contains(@hrefattrs, 'GroupChangeType')]//parent::*/span");
+  private static final By CHANGE_TYPE_CONFIRM_POPUP = By
+      .xpath("//*[contains(@id, 'GroupChangeType')]");
   private static final By FORM_CONFIRM = By.xpath("//*[@data-l='t,confirm']");
   private static final By PRIVACY_DROPDOWN = By.xpath("//*[@id='field_privacy']");
   private static final By CHANGE_NAME_FIELD = By.xpath(".//*[@id='field_name']");
-  private static final By BACK_MAIN_GROUP_PAGE = By.xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
+  private static final By BACK_MAIN_GROUP_PAGE = By
+      .xpath(".//*[@id='mainTopContentRow']//a[contains(@class,'compact-profile_a ellip-i')]");
 
   public GroupSettingsPage(WebDriver driver) {
     super(driver);
@@ -28,23 +31,24 @@ public class GroupSettingsPage extends AbstractSettingsPage {
   /**
    * Меняет название группы в форме имени
    */
-  public void changeName(String newName){
-   type(newName,CHANGE_NAME_FIELD);
+  public void changeName(String newName) {
+    type(newName, CHANGE_NAME_FIELD);
   }
 
   /**
    * Получаем название группы из формы имени
    */
-  public String getNameFromField(){
+  public String getNameFromField() {
     return driver.findElement(CHANGE_NAME_FIELD).getAttribute("value");
   }
 
   /**
    * Получаем название группы из поля
    */
-  public String getNameFromBackLink(){
+  public String getNameFromBackLink() {
     return driver.findElement(BACK_MAIN_GROUP_PAGE).getText();
   }
+
   /**
    * Меняет тип группы на страницу и обратно, подтверждая в попапе, обновляет уведомление
    */
@@ -79,9 +83,10 @@ public class GroupSettingsPage extends AbstractSettingsPage {
 
   /**
    * Возвращает тип группы
+   *
    * @return строка с типом
    */
-  public String getType(){
+  public String getType() {
     waitForVisibility(TYPE, "Не удалось получить тип группы на странице настроек");
     return driver.findElement(TYPE).getText();
   }

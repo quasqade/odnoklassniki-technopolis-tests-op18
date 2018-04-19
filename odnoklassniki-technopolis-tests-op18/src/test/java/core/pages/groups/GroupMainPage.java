@@ -37,7 +37,8 @@ public class GroupMainPage extends PageBase {
       .xpath("//span[contains(@id, 'GroupJoinRequests')]");
   private final static By MEMBER_COUNTER = By.xpath("//*[@id='membersCountEl']");
   private final static By MAIN_DROPDOWN = By.xpath("//*[contains(@class, 'primary-dropdown')]");
-  private final static By MEMBER_STATUS = By.xpath("//*[contains(@class, 'primary-dropdown')]//*[contains(@class, 'button')]");
+  private final static By MEMBER_STATUS = By
+      .xpath("//*[contains(@class, 'primary-dropdown')]//*[contains(@class, 'button')]");
   private final static By NAV_TOPICS = By.xpath("//*[contains(@data-l, 'Group_Forum')]");
   private final static By GROUP_NAME = By.xpath("//*[@class='mctc_name_tx']");
   private final static By GROUP_CATEGORY = By.xpath("//*[@class='group-info_category']");
@@ -75,7 +76,6 @@ public class GroupMainPage extends PageBase {
   public void confirmTopicPublication() {
     click(TOPIC_POPUP_CONFIRM);
   }
-
 
 
   /**
@@ -184,36 +184,40 @@ public class GroupMainPage extends PageBase {
 
   /**
    * Переходит к странице Темы
+   *
    * @return страница Темы
    */
-  public GroupTopicsPage goToTopics(){
+  public GroupTopicsPage goToTopics() {
     click(NAV_TOPICS);
     return new GroupTopicsPage(driver);
   }
 
   /**
    * Возвращает название группы из панели информации
+   *
    * @return строка с названием
    */
-  public String getGroupName(){
+  public String getGroupName() {
     waitForVisibility(GROUP_NAME, "Не удалось получить название группы");
     return driver.findElement(GROUP_NAME).getText();
   }
 
   /**
    * Возвращает категорию группы из панели информации
+   *
    * @return строка с категорией
    */
-  public String getGroupCategory(){
+  public String getGroupCategory() {
     waitForVisibility(GROUP_CATEGORY, "Не удалось получить категорию группы");
     return driver.findElement(GROUP_CATEGORY).getText();
   }
 
   /**
    * Возвращает статус пользователя из кнопки под логотипом
+   *
    * @return строка со статусом
    */
-  public String getUserStatus(){
+  public String getUserStatus() {
     waitForVisibility(MEMBER_STATUS, "Не удалось получить статус пользователя");
     return driver.findElement(MEMBER_STATUS).getText();
   }

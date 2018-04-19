@@ -77,7 +77,7 @@ public abstract class AbstractSettingsPage extends PageBase {
     return new RightsSettingsPage(driver);
   }
 
-  public ModeratorsSettingsPage clickModerators(){
+  public ModeratorsSettingsPage clickModerators() {
     click(NAV_MODERATORS);
     return new ModeratorsSettingsPage(driver);
   }

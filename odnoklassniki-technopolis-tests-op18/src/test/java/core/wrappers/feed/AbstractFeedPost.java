@@ -12,6 +12,7 @@ public abstract class AbstractFeedPost {
 
 
   protected final WebElement rootElement;
+
   protected AbstractFeedPost(WebElement rootElement) {
     this.rootElement = rootElement;
   }

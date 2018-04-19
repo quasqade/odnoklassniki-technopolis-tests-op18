@@ -47,44 +47,48 @@ public abstract class TestBase {
   /**
    * Останавливает все созданнные драйверы
    */
-  public void stopAll(){
-    for (WebDriver driver: drivers
-    ) {
+  public void stopAll() {
+    for (WebDriver driver : drivers
+        ) {
       this.driver = driver;
       stop();
     }
   }
 
   /**
-   * Переключает текущий драйвер на другой драйвер (который сперва должен быть инициализирован вызовом init()
+   * Переключает текущий драйвер на другой драйвер (который сперва должен быть инициализирован
+   * вызовом init()
+   *
    * @param driver драйвер, на который нужно перейти
    */
-  public void switchDriver(WebDriver driver){
-    if (!drivers.contains(driver))
+  public void switchDriver(WebDriver driver) {
+    if (!drivers.contains(driver)) {
       fail("Попытка переключиться на не инициализированный драйвер");
-    else
+    } else {
       this.driver = driver;
+    }
   }
 
   /**
    * Запоминает адрес текущей страницы, чтобы потом перейти
    */
-  public void rememberUrl(){
+  public void rememberUrl() {
     rememberedUrl = driver.getCurrentUrl();
   }
 
   /**
    * Переходит по запомненному адресу
    */
-  public void goToRememberedUrl(){
-    if (rememberedUrl!=null)
-    driver.navigate().to(rememberedUrl);
+  public void goToRememberedUrl() {
+    if (rememberedUrl != null) {
+      driver.navigate().to(rememberedUrl);
+    }
   }
 
   /**
    * Обновляет страницу текущего драйвера
    */
-  public void refresh(){
+  public void refresh() {
     driver.navigate().refresh();
   }
 
