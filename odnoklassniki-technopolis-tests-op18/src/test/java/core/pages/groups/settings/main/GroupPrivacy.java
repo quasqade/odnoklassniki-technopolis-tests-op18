@@ -5,6 +5,6 @@ package core.pages.groups.settings.main;
  */
 public enum GroupPrivacy {
   OPEN,
-  PRIVATE,
-  SECRET
+  BY_MEMBER_INVITATION_AND_REQUEST,
+  BY_MEMBER_INVITATION
 }

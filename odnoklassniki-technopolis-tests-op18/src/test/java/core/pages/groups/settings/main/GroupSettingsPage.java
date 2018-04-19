@@ -67,29 +67,32 @@ public class GroupSettingsPage extends AbstractSettingsPage {
    * @param type тип группы
    */
   public void changePrivacy(GroupPrivacy type) {
-    //TODO
     Select select = new Select(driver.findElement(PRIVACY_DROPDOWN));
-    switch (type) {
-      case OPEN:
-        select.selectByValue("OPEN");
-        break;
-      case PRIVATE:
-        select.selectByValue("BY_MEMBER_INVITATION_AND_REQUEST");
-        break;
-      case SECRET:
-        select.selectByValue("BY_MEMBER_INVITATION");
-        break;
-    }
+    select.selectByValue(type.toString());
   }
 
   /**
    * Возвращает тип группы
    *
-   * @return строка с типом
+   * @return enum с типом
    */
-  public String getType() {
+  public GroupType getType() {
     waitForVisibility(TYPE, "Не удалось получить тип группы на странице настроек");
-    return driver.findElement(TYPE).getText();
+    GroupType type;
+    String typeString = driver.findElement(TYPE).getText();
+    switch (typeString){
+      case "Страница":
+        type = GroupType.PAGE;
+        break;
+      case "Мероприятие":
+        type = GroupType.EVENT;
+      case "Группа":
+        type = GroupType.GROUP;
+        default:
+          Assert.fail("Неизвестный тип группы: " + typeString);
+          type = null;
+    }
+    return type;
   }
 
 }

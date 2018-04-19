@@ -40,7 +40,7 @@ public class PrivateGroupJoinTest extends TestBase {
     gmp.openOtherSections();
     GroupSettingsPage gsp = gmp.openGroupSettings();
     gsp.changeType();
-    gsp.changePrivacy(GroupPrivacy.PRIVATE);
+    gsp.changePrivacy(GroupPrivacy.BY_MEMBER_INVITATION_AND_REQUEST);
     gsp.confirmSettings();
     RightsSettingsPage rsp = gsp.clickRights();
     rsp.selectJoinNotificationFrequency(JoinNotificationFrequency.IMMEDIATELY);

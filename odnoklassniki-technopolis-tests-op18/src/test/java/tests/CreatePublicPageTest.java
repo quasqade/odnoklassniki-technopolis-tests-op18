@@ -5,6 +5,7 @@ import core.pages.SessionPage;
 import core.pages.groups.main.GroupMainPage;
 import core.pages.groups.settings.main.GroupSettingsPage;
 import core.pages.groups.settings.ModeratorsSettingsPage;
+import core.pages.groups.settings.main.GroupType;
 import core.pages.groups.settings.rights.RightsSettingsPage;
 import core.pages.groups.settings.rights.ShowPhotosInFeedOption;
 import model.TestBot;
@@ -35,7 +36,7 @@ public class CreatePublicPageTest extends TestBase {
     Assert.assertEquals(gmp.getUserStatus(), "Администратор");
     GroupSettingsPage gsp = gmp.openGroupSettings();
     Assert.assertEquals(gsp.getNameFromField(), PAGE_NAME);
-    Assert.assertEquals(gsp.getType(), "Страница");
+    Assert.assertEquals(gsp.getType(), GroupType.PAGE);
     RightsSettingsPage rsp = gsp.clickRights();
     Assert.assertFalse(rsp.canMembersSuggestTopics(),
         "Участники не должны предлагать темы по умолчанию");
