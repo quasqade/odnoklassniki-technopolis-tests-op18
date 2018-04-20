@@ -26,6 +26,7 @@ public class ForbidTopicCommentsTest extends TestBase {
   private static final String COMMENT_TEXT = "Тестовый комментарий";
 
   private static WebDriver firstDriver, secondDriver;
+  private static String groupId;
 
 
   @Before
@@ -33,13 +34,14 @@ public class ForbidTopicCommentsTest extends TestBase {
     firstDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
     GroupMainPage gmp = GroupHelper.createPublicPage(driver, GROUP_NAME);
-    rememberUrl();
+    groupId = gmp.getGroupId();
+
 
     init();
     secondDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
     new UserMainPage(driver); //дождаться загрузки страницы
-    goToRememberedUrl();
+    goToGroup(groupId);
     gmp = new GroupMainPage(driver);
     Assert.assertFalse(gmp.isMemberDropdownPresent(), "Пользователь уже состоит в группе");
     gmp.joinGroup();
@@ -57,7 +59,7 @@ public class ForbidTopicCommentsTest extends TestBase {
     Assert.assertEquals(firstTopic.getText(), TOPIC_TEXT);
     Assert.assertTrue(firstTopic.areCommentsAllowed(), "Комментарии уже запрещены");
     firstTopic.forbidComments();
-    //refresh(); //можно напихать ожиданий перед сборкой тем но там сложно угадать когда новые а когда старые
+    refresh(); //можно напихать ожиданий перед сборкой тем но там сложно угадать когда новые а когда старые
     gtp.collectTopics();
     firstTopic = gtp.getGroupTopics().get(0);
     Assert.assertFalse(firstTopic.areCommentsAllowed(), "Не удалось запретить комментарии");

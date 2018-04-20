@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.fail;
 
+import core.pages.groups.main.GroupMainPage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -73,19 +74,12 @@ public abstract class TestBase {
   }
 
   /**
-   * Запоминает адрес текущей страницы, чтобы потом перейти
+   * Переходит на страницу группы с указанным ID
    */
-  public void rememberUrl() {
-    rememberedUrl = driver.getCurrentUrl();
-  }
-
-  /**
-   * Переходит по запомненному адресу
-   */
-  public void goToRememberedUrl() {
-    if (rememberedUrl != null) {
-      driver.navigate().to(rememberedUrl);
-    }
+  public GroupMainPage goToGroup(String groupId){
+    String groupUrl = "https://ok.ru/group/" + groupId;
+    driver.navigate().to(groupUrl);
+    return new GroupMainPage(driver);
   }
 
   /**

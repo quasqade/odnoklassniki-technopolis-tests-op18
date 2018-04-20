@@ -22,11 +22,12 @@ public class PrivateGroupJoinTest extends TestBase {
   private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot79", "QA18testbot");
   private static final String GROUP_NAME = getRandomId();
   private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
+  private static String groupId;
 
   @Before
   public void preconditions() {
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
-    GroupHelper.createPublicPage(driver, GROUP_NAME);
+    groupId = GroupHelper.createPublicPage(driver, GROUP_NAME).getGroupId();
   }
 
 
@@ -34,7 +35,6 @@ public class PrivateGroupJoinTest extends TestBase {
   public void testCase() throws Exception {
 
     //test
-    rememberUrl(); //записываем адрес страницы, чтобы потом возвращаться
     WebDriver firstDriver = driver;
     GroupMainPage gmp = new GroupMainPage(driver);
     GroupSettingsPage gsp = gmp.openGroupSettings();
@@ -50,7 +50,7 @@ public class PrivateGroupJoinTest extends TestBase {
     WebDriver secondDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
     new UserMainPage(driver); //чтобы дождаться загрузки страницы
-    goToRememberedUrl();
+    goToGroup(groupId);
     gmp = new GroupMainPage(driver);
     gmp.joinGroup();
     Assert.assertTrue(gmp.isInvitationPending());

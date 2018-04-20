@@ -1,5 +1,6 @@
 package core.pages.groups.main;
 
+import com.sun.jndi.toolkit.url.Uri;
 import core.pages.PageBase;
 import core.pages.groups.GroupTopicsPage;
 import core.pages.groups.settings.main.GroupSettingsPage;
@@ -222,6 +223,20 @@ public class GroupMainPage extends PageBase {
   public String getUserStatus() {
     waitForVisibility(MEMBER_STATUS, "Не удалось получить статус пользователя");
     return driver.findElement(MEMBER_STATUS).getText();
+  }
+
+  /**
+   * Возвращает идентификатор группы из URL
+   * @return строка с идентификатором
+   */
+  public String getGroupId(){
+    String[] splitUrl = driver.getCurrentUrl().split("/");
+    for (int i = 0; i < splitUrl.length; i++) {
+      if (splitUrl[i].equals("group"))
+        return splitUrl[i+1];
+    }
+    Assert.fail("Не удалось получить айди группы из URL");
+    return null;
   }
 
 }
