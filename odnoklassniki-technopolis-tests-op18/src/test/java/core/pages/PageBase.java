@@ -35,6 +35,13 @@ public abstract class PageBase {
     driver.findElement(xpath).click();
   }
 
+  protected void click(WebElement element) {
+    if (!explicitWait(ExpectedConditions.elementToBeClickable(element), 10, 500)) {
+      Assert.fail("Элемент не кликабелен: " + element);
+    }
+    element.click();
+  }
+
   protected void type(String name, By field_name) {
     driver.findElement(field_name).clear();
     driver.findElement(field_name).sendKeys(name);
@@ -161,7 +168,7 @@ public abstract class PageBase {
    * @param errorMessage сообщение об ошибке, если элемент не найдётся
    */
   protected void waitForVisibility(By locator, String errorMessage) {
-    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(locator), 5, 500)) {
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(locator), 2, 1000)) {
       Assert.fail(errorMessage);
     }
   }

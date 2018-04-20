@@ -1,13 +1,18 @@
 package core.pages.groups.main;
 
-import com.sun.jndi.toolkit.url.Uri;
+import core.helpers.GroupHelper;
 import core.pages.PageBase;
 import core.pages.groups.GroupTopicsPage;
+import core.pages.groups.links.GroupLinksPage;
 import core.pages.groups.settings.main.GroupSettingsPage;
+import core.wrappers.links.MainGroupLinkWrapper;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,6 +32,8 @@ public class GroupMainPage extends PageBase {
       .xpath("//*[contains(@class, 'Dropdown') and contains(@id, 'otherSections')]");
   private final static By OTHER_SECTIONS_DROPDOWN = By.xpath(
       "//*[@data-module='SimplePopup' and contains(@data-trigger-selector, 'otherSections')]/parent::*");
+  private final static By OTHER_SECTIONS_LINKS = By.xpath("//*[contains(@hrefattrs, 'Group_Links')]");
+  private final static By OTHER_SECTIONS_LINK_COUNTER = By.xpath("//*[contains(@hrefattrs, 'Group_Links')]//*[@class='navMenuCount']");
   private final static By DROPDOWN_SETTINGS = By
       .xpath(".//a[contains(@hrefattrs,'AltGroupTopCardButtonsEdit')]");
   private final static By JOIN_BUTTON = By.xpath("//*[contains(@href, 'GroupJoin')]");
@@ -44,6 +51,10 @@ public class GroupMainPage extends PageBase {
   private final static By NAV_TOPICS = By.xpath("//*[contains(@data-l, 'Group_Forum')]");
   private final static By GROUP_NAME = By.xpath("//*[@class='mctc_name_tx']");
   private final static By GROUP_CATEGORY = By.xpath("//*[@class='group-info_category']");
+  private final static By GROUP_LINK_CARD = By.xpath("//*[contains(@id, 'GroupsToGroup')]//*[@class='groupShown']");
+
+  private List<MainGroupLinkWrapper> linkWrappers = new ArrayList<>();
+
 
   public GroupMainPage(WebDriver driver) {
     super(driver);
@@ -87,7 +98,7 @@ public class GroupMainPage extends PageBase {
     click(OTHER_SECTIONS);
     //проверяем, что меню открылось
     Assert.assertTrue("Выпадающее меню не появилось после нажатия Ещё",
-        checkIfOtherSectionsIsOpen());
+        isOtherSectionsDropdownPresent());
   }
 
   /**
@@ -105,14 +116,8 @@ public class GroupMainPage extends PageBase {
    *
    * @return true - открыто, false - нет
    */
-  public boolean checkIfOtherSectionsIsOpen() {
-    try {
-      new WebDriverWait(driver, 5)
-          .until(ExpectedConditions.visibilityOfElementLocated(OTHER_SECTIONS_DROPDOWN));
-    } catch (TimeoutException te) {
-      return false;
-    }
-    return true;
+  public boolean isOtherSectionsDropdownPresent() {
+    return explicitWait(ExpectedConditions.visibilityOfElementLocated(OTHER_SECTIONS_DROPDOWN), 1, 100);
   }
 
   /**
@@ -230,12 +235,64 @@ public class GroupMainPage extends PageBase {
    * @return строка с идентификатором
    */
   public String getGroupId(){
-    String[] splitUrl = driver.getCurrentUrl().split("/");
-    for (int i = 0; i < splitUrl.length; i++) {
-      if (splitUrl[i].equals("group"))
-        return splitUrl[i+1];
+    return GroupHelper.getIDFromLink(driver.getCurrentUrl());
+  }
+
+  /**
+   * Открывает меню Ещё, Возвращает значение счетчика ссылок из выпадающего меню Ещё
+   * @return 0 если нет счетчика, иначе значение счетчика
+   */
+  public int getLinkCountFromOtherSections(){
+    if (!isOtherSectionsDropdownPresent())
+    openOtherSections();
+    if (!explicitWait(ExpectedConditions.visibilityOfElementLocated(OTHER_SECTIONS_LINK_COUNTER), 1, 100))
+      return 0;
+    WebElement counter = driver.findElement(OTHER_SECTIONS_LINK_COUNTER);
+    return Integer.parseInt(counter.getText());
+  }
+
+  /**
+   * Открывает меню Ещё если не открыто и переходит на страницу Ссылки
+   * @return страница Ссылки
+   */
+  public GroupLinksPage goToLinks(){
+    if (!isOtherSectionsDropdownPresent())
+      openOtherSections();
+    click(OTHER_SECTIONS_LINKS);
+    return new GroupLinksPage(driver);
+  }
+
+  /**
+   * Собирает список групп в панели Сссылки на группы
+   * @return false если нет ссылок
+   */
+  public boolean collectFriendlyLinks(){
+    linkWrappers = new ArrayList<>();
+    List<WebElement> cardElements = driver.findElements(GROUP_LINK_CARD);
+    if (cardElements.size()==0)
+      return false;
+    for (WebElement card: cardElements
+    ) {
+      linkWrappers.add(new MainGroupLinkWrapper(card));
     }
-    Assert.fail("Не удалось получить айди группы из URL");
+    return true;
+  }
+
+  /**
+   * Собирает список групп и идет по ссылке на указанную
+   * @param groupId идентификатор групп
+   * @return страница группы или падает если нет группы
+   */
+  public GroupMainPage collectAndGoToFriendlyGroup(String groupId){
+    collectFriendlyLinks();
+    for (MainGroupLinkWrapper wrapper: linkWrappers
+    ) {
+      if (wrapper.getGroupId().equals(groupId)){
+        click(wrapper.getClickableLink());
+        return new GroupMainPage(driver);
+      }
+    }
+    Assert.fail("Попытка перехода по ссылке на группу, которой нет в ссылках");
     return null;
   }
 

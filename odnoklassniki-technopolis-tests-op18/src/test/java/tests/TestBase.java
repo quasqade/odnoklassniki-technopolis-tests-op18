@@ -90,7 +90,7 @@ public abstract class TestBase {
   }
 
   protected static String getRandomId(){
-    return UUID.randomUUID().toString();
+    return UUID.randomUUID().toString().replaceAll("-", "");
   }
 
 }

@@ -2,23 +2,49 @@ package tests;
 
 import core.helpers.GroupHelper;
 import core.pages.SessionPage;
+import core.pages.UserMainPage;
+import core.pages.groups.links.AddLinkOverlay;
+import core.pages.groups.links.GroupLinksPage;
+import core.pages.groups.main.GroupMainPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
+import org.testng.Assert;
 
 public class AddLinkToOtherGroup extends TestBase {
 
-  private static final String PAGE_NAME = "Тестовая страница";
+  private static final String PAGE_NAME_1 = getRandomId();
+  private static final String PAGE_NAME_2 = getRandomId();
   private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
+  private static String firstGroupId, secondGroupId;
 
   @Before
   public void preconditions() {
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
-    GroupHelper.createPublicPage(driver, PAGE_NAME);
+    GroupMainPage gmp = GroupHelper.createPublicPage(driver, PAGE_NAME_1);
+    firstGroupId = gmp.getGroupId();
+    gmp.returnToUserPage();
+    gmp = GroupHelper.createPublicPage(driver, PAGE_NAME_2);
+    secondGroupId = gmp.getGroupId();
+    goToGroup(firstGroupId);
   }
 
   @Test
   public void testCase() throws Exception {
-  //  String firstGroup =
+    GroupMainPage gmp = new GroupMainPage(driver);
+    int linkCount = gmp.getLinkCountFromOtherSections();
+    GroupLinksPage glp = gmp.goToLinks();
+    AddLinkOverlay alo = glp.addLink();
+    Assert.assertFalse(alo.getSelectionStateByGroupId(secondGroupId), "Вторая группа уже добавлена как ссылка");
+    alo.selectByGroupId(secondGroupId);
+    Assert.assertTrue(alo.getSelectionStateByGroupId(secondGroupId), "Не удалось выбрать вторую группу для добавления");
+    glp = alo.confirmAndClose();
+    Assert.assertTrue(glp.isGroupCardPresent(secondGroupId), "Добавленная ссылка отсутствует в списке");
+    gmp = glp.returnToGroupPage();
+    Assert.assertEquals(gmp.getLinkCountFromOtherSections(), linkCount+1, "Счетчик ссылок в разделе Ещё не увеличивается");
+    gmp = gmp.collectAndGoToFriendlyGroup(secondGroupId);
+    Assert.assertEquals(gmp.getGroupId(), secondGroupId, "Переход по ссылке ведет не в ту группу");
+
+
   }
   }

@@ -81,4 +81,6 @@ public class UserMainPage extends PageBase {
   public AbstractFeedPost getFirstPostInFeed() {
     return feedPosts.get(0);
   }
+
+
 }
