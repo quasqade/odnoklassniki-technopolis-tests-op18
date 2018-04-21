@@ -1,6 +1,7 @@
 package core.user;
 
 import core.PageBase;
+import core.groups.settings.main.GroupType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -40,17 +41,19 @@ public class UserGroupsPage extends PageBase {
   }
 
   /**
-   * Выбирает тип "публичная страница"
+   * Выбирает тип группы
    */
-  public void selectPublicPage() {
-    click(CATEGORY_PUBLIC_PAGE);
-  }
-
-  /**
-   * Выбирает тип "группа по интересам"
-   */
-  public void selectPublicGroup() {
-    click(CATEGORY_PUBLIC_GROUP);
+  public void selectGroupType(GroupType type) {
+    switch (type){
+      case PAGE:
+        click(CATEGORY_PUBLIC_PAGE);
+        break;
+      case GROUP:
+        click(CATEGORY_PUBLIC_GROUP);
+        break;
+      case EVENT:
+        break;
+    }
   }
 
 

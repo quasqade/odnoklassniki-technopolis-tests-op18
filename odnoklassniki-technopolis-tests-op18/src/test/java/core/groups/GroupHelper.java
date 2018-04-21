@@ -1,5 +1,6 @@
 package core.groups;
 
+import core.groups.settings.main.GroupType;
 import core.user.UserGroupsPage;
 import core.user.UserMainPage;
 import core.groups.main.GroupMainPage;
@@ -22,7 +23,7 @@ public class GroupHelper {
   public static GroupMainPage createPublicPage(WebDriver driver, String name) {
     UserGroupsPage userGroupsPage = new UserMainPage(driver).openGroupsByToolbar();
     userGroupsPage.createGroupByToolbar();
-    userGroupsPage.selectPublicPage();
+    userGroupsPage.selectGroupType(GroupType.PAGE);
     userGroupsPage.inputGroupName(name);
     userGroupsPage.selectCategoryComputers();
     userGroupsPage.confirmGroupCreation();
