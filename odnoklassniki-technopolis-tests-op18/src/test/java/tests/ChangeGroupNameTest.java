@@ -1,9 +1,9 @@
 package tests;
 
-import core.helpers.GroupHelper;
-import core.pages.SessionPage;
-import core.pages.groups.main.GroupMainPage;
-import core.pages.groups.settings.main.GroupSettingsPage;
+import core.groups.GroupHelper;
+import core.login.SessionPage;
+import core.groups.main.GroupMainPage;
+import core.groups.settings.main.GroupSettingsPage;
 import model.TestBot;
 import org.junit.Assert;
 import org.junit.Before;

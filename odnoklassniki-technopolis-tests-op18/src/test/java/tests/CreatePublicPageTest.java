@@ -1,13 +1,13 @@
 package tests;
 
-import core.helpers.GroupHelper;
-import core.pages.SessionPage;
-import core.pages.groups.main.GroupMainPage;
-import core.pages.groups.settings.ModeratorsSettingsPage;
-import core.pages.groups.settings.main.GroupSettingsPage;
-import core.pages.groups.settings.main.GroupType;
-import core.pages.groups.settings.rights.RightsSettingsPage;
-import core.pages.groups.settings.rights.ShowPhotosInFeedOption;
+import core.groups.GroupHelper;
+import core.login.SessionPage;
+import core.groups.main.GroupMainPage;
+import core.groups.settings.ModeratorsSettingsPage;
+import core.groups.settings.main.GroupSettingsPage;
+import core.groups.settings.main.GroupType;
+import core.groups.settings.rights.RightsSettingsPage;
+import core.groups.settings.rights.ShowPhotosInFeedOption;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;

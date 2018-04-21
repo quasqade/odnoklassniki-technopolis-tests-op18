@@ -1,11 +1,10 @@
 package tests;
 
-import core.helpers.GroupHelper;
-import core.pages.SessionPage;
-import core.pages.UserMainPage;
-import core.pages.groups.links.AddLinkOverlay;
-import core.pages.groups.links.GroupLinksPage;
-import core.pages.groups.main.GroupMainPage;
+import core.groups.GroupHelper;
+import core.login.SessionPage;
+import core.groups.links.AddLinkOverlay;
+import core.groups.links.GroupLinksPage;
+import core.groups.main.GroupMainPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;

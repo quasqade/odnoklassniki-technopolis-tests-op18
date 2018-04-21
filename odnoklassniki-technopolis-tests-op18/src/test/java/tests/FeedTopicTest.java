@@ -1,10 +1,10 @@
 package tests;
 
-import core.helpers.GroupHelper;
-import core.pages.SessionPage;
-import core.pages.UserMainPage;
-import core.pages.groups.main.GroupMainPage;
-import core.wrappers.feed.AbstractFeedPost;
+import core.groups.GroupHelper;
+import core.login.SessionPage;
+import core.user.UserMainPage;
+import core.groups.main.GroupMainPage;
+import core.user.feed.AbstractFeedPost;
 import model.TestBot;
 import org.junit.Assert;
 import org.junit.Before;

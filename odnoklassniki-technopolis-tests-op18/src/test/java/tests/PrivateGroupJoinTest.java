@@ -1,13 +1,13 @@
 package tests;
 
-import core.helpers.GroupHelper;
-import core.pages.SessionPage;
-import core.pages.UserMainPage;
-import core.pages.groups.main.GroupMainPage;
-import core.pages.groups.settings.main.GroupPrivacy;
-import core.pages.groups.settings.main.GroupSettingsPage;
-import core.pages.groups.settings.rights.JoinNotificationFrequency;
-import core.pages.groups.settings.rights.RightsSettingsPage;
+import core.groups.GroupHelper;
+import core.login.SessionPage;
+import core.user.UserMainPage;
+import core.groups.main.GroupMainPage;
+import core.groups.settings.main.GroupPrivacy;
+import core.groups.settings.main.GroupSettingsPage;
+import core.groups.settings.rights.JoinNotificationFrequency;
+import core.groups.settings.rights.RightsSettingsPage;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;

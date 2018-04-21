@@ -1,12 +1,12 @@
 package tests;
 
-import core.helpers.GroupHelper;
-import core.pages.SessionPage;
-import core.pages.UserMainPage;
-import core.pages.dialogues.CommentPostingOverlay;
-import core.pages.groups.GroupTopicsPage;
-import core.pages.groups.main.GroupMainPage;
-import core.wrappers.topics.GroupTopicWrapper;
+import core.groups.GroupHelper;
+import core.login.SessionPage;
+import core.user.UserMainPage;
+import core.groups.topics.CommentPostingOverlay;
+import core.groups.topics.GroupTopicsPage;
+import core.groups.main.GroupMainPage;
+import core.groups.topics.GroupTopicWrapper;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
