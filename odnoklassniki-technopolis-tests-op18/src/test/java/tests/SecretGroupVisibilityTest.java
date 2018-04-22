@@ -20,9 +20,9 @@ import org.testng.Assert;
  */
 public class SecretGroupVisibilityTest extends TestBase {
 
-  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot79", "QA18testbot");
+  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot80", "QA18testbot");
   private static final String GROUP_NAME = getRandomId();
-  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
+  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot81", "QA18testbot");
   private static String groupId;
 
   @Before
@@ -36,7 +36,6 @@ public class SecretGroupVisibilityTest extends TestBase {
   public void testCase() throws Exception {
 
     //test
-    WebDriver firstDriver = driver;
     GroupMainPage gmp = new GroupMainPage(driver);
     GroupSettingsPage gsp = gmp.openGroupSettings();
     gsp.changeType();

@@ -16,6 +16,8 @@ public class RightsSettingsPage extends AbstractSettingsPage {
   private static final By RIGHTS_FORM = By.xpath("//*[contains(@id, 'GroupRightsForm')]");
   private static final By NOTIFICATION_FREQUENCY_DROPDOWN = By
       .xpath("//*[contains(@id, 'joinRequestNotification')]");
+  private static final By MENU_OF_GOOODS_DROPDOWN = By
+      .xpath("//*[contains(@id, 'field_opt_advertPage')]");
   private static final By SUGGESTED_TOPICS = By.xpath("//*[contains(@id, 'SuggestedTopics')]");
   private static final By SHOW_PHOTOS_IN_FEED = By.xpath("//*[contains(@id, 'ShowPhotosInFeed')]");
 
@@ -45,6 +47,7 @@ public class RightsSettingsPage extends AbstractSettingsPage {
     select.selectByValue(frequency.toString());
   }
 
+
   /**
    * Проверяет, могут ли участники предлагать темы
    *
@@ -69,4 +72,14 @@ public class RightsSettingsPage extends AbstractSettingsPage {
     return option;
   }
 
+
+  /**
+   * Выбирает как отображается меню Товаров на главной странице группы
+   */
+  public void selectDisplayMenuOfGoods(MenuOfGoodsPopUp selector) {
+    waitForVisibility(MENU_OF_GOOODS_DROPDOWN,
+        "Не удалось получить параметры частоты оповещения");
+    Select select = new Select(driver.findElement(MENU_OF_GOOODS_DROPDOWN));
+    select.selectByValue(selector.toString());
+  }
 }

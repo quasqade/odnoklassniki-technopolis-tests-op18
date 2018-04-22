@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Проверяется создание поста в группе и его появление на в ленте групп пользователя
+ * Проверяется создание поста в группе и его появление в ленте групп пользователя
  */
 public class FeedTopicTest extends TestBase {
 

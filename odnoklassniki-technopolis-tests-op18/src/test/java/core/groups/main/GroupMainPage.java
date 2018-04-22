@@ -50,6 +50,8 @@ public class GroupMainPage extends PageBase {
   private final static By GROUP_NAME = By.xpath("//*[@class='mctc_name_tx']");
   private final static By GROUP_CATEGORY = By.xpath("//*[@class='group-info_category']");
   private final static By GROUP_LINK_CARD = By.xpath("//*[contains(@id, 'GroupsToGroup')]//*[@class='groupShown']");
+  private final static By GROUP_GOODS = By.xpath(".//a[contains(@hrefattrs,'altGroupAdvertsPage')]");
+
 
   private List<MainGroupLinkWrapper> linkWrappers = new ArrayList<>();
 
@@ -116,6 +118,20 @@ public class GroupMainPage extends PageBase {
    */
   public boolean isOtherSectionsDropdownPresent() {
     return explicitWait(ExpectedConditions.visibilityOfElementLocated(OTHER_SECTIONS_DROPDOWN), 1, 100);
+  }
+
+  /**
+   * Проверяет отображение пункта "Товары" в верхнем навбаре
+   *
+   * @return true - отображается, false - нет
+   */
+  public boolean isGroupGoodsPresent() {
+    return explicitWait(ExpectedConditions.visibilityOfElementLocated(GROUP_GOODS), 1, 100) ;
+  }
+
+
+  public void clickToGroupGoods() {
+    click(GROUP_GOODS);
   }
 
   /**

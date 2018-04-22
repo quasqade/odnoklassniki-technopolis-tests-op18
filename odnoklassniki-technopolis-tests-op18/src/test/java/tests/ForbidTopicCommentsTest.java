@@ -19,9 +19,9 @@ import org.testng.Assert;
  */
 public class ForbidTopicCommentsTest extends TestBase {
 
-  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot79", "QA18testbot");
+  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot80", "QA18testbot");
   private static final String GROUP_NAME = getRandomId();
-  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
+  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot81", "QA18testbot");
   private static final String TOPIC_TEXT = "Тест запрета комментариев";
   private static final String COMMENT_TEXT = "Тестовый комментарий";
 
@@ -35,7 +35,6 @@ public class ForbidTopicCommentsTest extends TestBase {
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
     GroupMainPage gmp = GroupHelper.createPublicPage(driver, GROUP_NAME);
     groupId = gmp.getGroupId();
-
 
     init();
     secondDriver = driver;

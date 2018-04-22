@@ -81,6 +81,12 @@ public abstract class AbstractSettingsPage extends PageBase {
     return new RightsSettingsPage(driver);
   }
 
+
+  /**
+   * Переходит на страницу Администрация через левую навигацию
+   *
+   * @return страница Администрация
+   */
   public ModeratorsSettingsPage clickModerators() {
     click(NAV_MODERATORS);
     return new ModeratorsSettingsPage(driver);

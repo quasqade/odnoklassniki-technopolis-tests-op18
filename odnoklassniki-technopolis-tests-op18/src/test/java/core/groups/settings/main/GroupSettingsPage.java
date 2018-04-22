@@ -80,11 +80,14 @@ public class GroupSettingsPage extends AbstractSettingsPage {
         break;
       case "Мероприятие":
         type = GroupType.EVENT;
+        break;
       case "Группа":
         type = GroupType.GROUP;
+        break;
       default:
         Assert.fail("Неизвестный тип группы: " + typeString);
         type = null;
+        break;
     }
     return type;
   }
