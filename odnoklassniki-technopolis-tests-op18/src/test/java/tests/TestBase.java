@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.fail;
 
+import core.groups.GoToGroupPromise;
 import core.groups.main.GroupMainPage;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,10 +75,10 @@ public abstract class TestBase {
   /**
    * Переходит на страницу группы с указанным ID
    */
-  public GroupMainPage goToGroup(String groupId){
+  public GoToGroupPromise goToGroup(String groupId){
     String groupUrl = "https://ok.ru/group/" + groupId;
     driver.navigate().to(groupUrl);
-    return new GroupMainPage(driver);
+    return new GoToGroupPromise(driver);
   }
 
   /**

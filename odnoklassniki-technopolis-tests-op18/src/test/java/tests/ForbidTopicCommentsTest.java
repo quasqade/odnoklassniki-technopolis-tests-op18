@@ -41,8 +41,7 @@ public class ForbidTopicCommentsTest extends TestBase {
     secondDriver = driver;
     new SessionPage(driver).loginAuth(USER_ACCOUNT_MEMBER);
     new UserMainPage(driver); //дождаться загрузки страницы
-    goToGroup(groupId);
-    gmp = new GroupMainPage(driver);
+    gmp = goToGroup(groupId).andGroupOpened();
     Assert.assertFalse(gmp.isMemberDropdownPresent(), "Пользователь уже состоит в группе");
     gmp.joinGroup();
     Assert.assertTrue(gmp.isMemberDropdownPresent(), "Не удалось вступить в группу");
