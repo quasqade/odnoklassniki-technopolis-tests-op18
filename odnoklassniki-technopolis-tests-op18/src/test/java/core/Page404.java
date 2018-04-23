@@ -3,7 +3,6 @@ package core;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-
 /**
  * Представляет страницу 404
  */

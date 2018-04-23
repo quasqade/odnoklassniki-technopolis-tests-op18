@@ -1,5 +1,6 @@
 package core.groups.main;
 
+import core.MenuOfGoodsGroupPage;
 import core.groups.GroupHelper;
 import core.PageBase;
 import core.groups.topics.GroupTopicsPage;
@@ -130,8 +131,9 @@ public class GroupMainPage extends PageBase {
   }
 
 
-  public void clickToGroupGoods() {
+  public MenuOfGoodsGroupPage clickToGroupGoods() {
     click(GROUP_GOODS);
+    return new MenuOfGoodsGroupPage(driver);
   }
 
   /**

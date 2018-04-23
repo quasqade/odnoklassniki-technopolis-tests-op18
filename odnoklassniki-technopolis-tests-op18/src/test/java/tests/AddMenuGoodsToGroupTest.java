@@ -31,7 +31,7 @@ public class AddMenuGoodsToGroupTest extends TestBase {
     groupSettingsPage.clickRights();
     new RightsSettingsPage(driver).selectDisplayMenuOfGoods(MenuOfGoodsPopUp.SHOW);
     groupSettingsPage.confirmSettings();
-    goToGroup(groupId);
+    groupSettingsPage.toGroupMainPage();
 
     //Проверочки
     Assert.assertTrue(groupMainPage.isGroupGoodsPresent()); //проверяем, что пункт "Товары" отображается в верхнем меню
