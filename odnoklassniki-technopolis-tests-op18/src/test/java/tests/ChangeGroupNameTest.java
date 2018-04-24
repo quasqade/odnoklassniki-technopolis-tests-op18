@@ -1,9 +1,9 @@
 package tests;
 
 import core.groups.GroupHelper;
-import core.login.SessionPage;
 import core.groups.main.GroupMainPage;
 import core.groups.settings.main.GroupSettingsPage;
+import core.login.SessionPage;
 import model.BotProvider;
 import model.TestBot;
 import org.junit.Assert;
@@ -17,9 +17,9 @@ import org.junit.Test;
 public class ChangeGroupNameTest extends TestBase {
 
   private static final String GROUP_NAME = getRandomId();
-  private final TestBot USER_ACCOUNT = BotProvider.requestBot(this);
   private static final String newName = "New name";
   private static String groupId;
+  private final TestBot USER_ACCOUNT = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {

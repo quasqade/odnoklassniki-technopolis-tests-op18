@@ -13,9 +13,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AddMenuGoodsToGroupTest extends TestBase {
+
   private static final String GROUP_NAME = getRandomId();
-  private final TestBot USER_ACCOUNT = BotProvider.requestBot(this);
   private static String groupId;
+  private final TestBot USER_ACCOUNT = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {
@@ -35,7 +36,8 @@ public class AddMenuGoodsToGroupTest extends TestBase {
     groupSettingsPage.toGroupMainPage();
 
     //Проверочки
-    Assert.assertTrue(groupMainPage.isGroupGoodsPresent()); //проверяем, что пункт "Товары" отображается в верхнем меню
+    Assert.assertTrue(groupMainPage
+        .isGroupGoodsPresent()); //проверяем, что пункт "Товары" отображается в верхнем меню
     groupMainPage.clickToGroupGoods();
   }
 

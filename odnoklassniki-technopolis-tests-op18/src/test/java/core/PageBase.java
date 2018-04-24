@@ -1,8 +1,8 @@
 package core;
 
 import com.google.common.base.Preconditions;
-import java.util.concurrent.TimeUnit;
 import core.user.UserMainPage;
+import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -46,9 +46,24 @@ public abstract class PageBase {
   protected void type(String name, By field_name) {
     driver.findElement(field_name).clear();
     driver.findElement(field_name).sendKeys(name);
+
   }
 
-  protected void scrollToElement(By locator){
+  protected void typeSlowly(String name, By field_name) {
+    driver.findElement(field_name).clear();
+    for (Character c : name.toCharArray()
+        ) {
+      try {
+        Thread.sleep(10);
+        driver.findElement(field_name).sendKeys(c + "");
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
+  }
+
+  protected void scrollToElement(By locator) {
     WebElement element = driver.findElement(locator);
     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
     try {
@@ -57,6 +72,7 @@ public abstract class PageBase {
       e.printStackTrace();
     }
   }
+
   public void refreshWebPage() {
     driver.navigate().refresh();
   }

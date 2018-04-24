@@ -1,7 +1,6 @@
 package core.groups.topics;
 
 import core.DriverHelper;
-import core.groups.topics.CommentPostingOverlay;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

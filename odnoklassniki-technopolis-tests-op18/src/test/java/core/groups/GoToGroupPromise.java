@@ -11,15 +11,15 @@ public class GoToGroupPromise {
 
   private WebDriver driver;
 
-  public GoToGroupPromise(WebDriver driver){
+  public GoToGroupPromise(WebDriver driver) {
     this.driver = driver;
   }
 
-  public GroupMainPage andGroupOpened(){
+  public GroupMainPage andGroupOpened() {
     return new GroupMainPage(driver);
   }
 
-  public Page404 and404Opened(){
+  public Page404 and404Opened() {
     return new Page404(driver);
   }
 

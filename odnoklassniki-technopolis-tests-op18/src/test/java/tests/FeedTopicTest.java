@@ -1,9 +1,9 @@
 package tests;
 
 import core.groups.GroupHelper;
+import core.groups.main.GroupMainPage;
 import core.login.SessionPage;
 import core.user.UserMainPage;
-import core.groups.main.GroupMainPage;
 import core.user.feed.AbstractFeedPost;
 import model.BotProvider;
 import model.TestBot;

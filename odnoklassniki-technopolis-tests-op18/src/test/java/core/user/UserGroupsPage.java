@@ -44,7 +44,7 @@ public class UserGroupsPage extends PageBase {
    * Выбирает тип группы
    */
   public void selectGroupType(GroupType type) {
-    switch (type){
+    switch (type) {
       case PAGE:
         click(CATEGORY_PUBLIC_PAGE);
         break;

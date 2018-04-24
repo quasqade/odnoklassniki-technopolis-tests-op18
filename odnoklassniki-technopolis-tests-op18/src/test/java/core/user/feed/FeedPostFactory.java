@@ -1,8 +1,5 @@
 package core.user.feed;
 
-import core.user.feed.AbstractFeedPost;
-import core.user.feed.FeedPostGroup;
-import core.user.feed.FeedPostUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

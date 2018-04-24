@@ -1,4 +1,3 @@
-
 package core.groups.settings.rights;
 
 public enum MenuOfGoodsPopUp {

@@ -1,13 +1,13 @@
 package tests;
 
 import core.groups.GroupHelper;
-import core.login.SessionPage;
 import core.groups.main.GroupMainPage;
 import core.groups.settings.ModeratorsSettingsPage;
 import core.groups.settings.main.GroupSettingsPage;
 import core.groups.settings.main.GroupType;
 import core.groups.settings.rights.RightsSettingsPage;
 import core.groups.settings.rights.ShowPhotosInFeedOption;
+import core.login.SessionPage;
 import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;

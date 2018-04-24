@@ -1,12 +1,12 @@
 package tests;
 
 import core.groups.GroupHelper;
+import core.groups.main.GroupMainPage;
+import core.groups.topics.CommentPostingOverlay;
+import core.groups.topics.GroupTopicWrapper;
+import core.groups.topics.GroupTopicsPage;
 import core.login.SessionPage;
 import core.user.UserMainPage;
-import core.groups.topics.CommentPostingOverlay;
-import core.groups.topics.GroupTopicsPage;
-import core.groups.main.GroupMainPage;
-import core.groups.topics.GroupTopicWrapper;
 import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
@@ -20,15 +20,13 @@ import org.testng.Assert;
  */
 public class ForbidTopicCommentsTest extends TestBase {
 
-  private final TestBot USER_ACCOUNT_MEMBER = BotProvider.requestBot(this);
   private static final String GROUP_NAME = getRandomId();
-  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
   private static final String TOPIC_TEXT = "Тест запрета комментариев";
   private static final String COMMENT_TEXT = "Тестовый комментарий";
-
   private static WebDriver firstDriver, secondDriver;
   private static String groupId;
-
+  private final TestBot USER_ACCOUNT_MEMBER = BotProvider.requestBot(this);
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {

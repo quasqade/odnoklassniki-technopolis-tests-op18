@@ -13,20 +13,21 @@ public class MainGroupLinkWrapper {
 
   private WebElement wrappedElement;
 
-  public MainGroupLinkWrapper(WebElement wrappedElement){
+  public MainGroupLinkWrapper(WebElement wrappedElement) {
     this.wrappedElement = wrappedElement;
   }
 
   /**
    * Возвращает ID группы
+   *
    * @return айди
    */
-  public String getGroupId(){
+  public String getGroupId() {
     WebElement link = wrappedElement.findElement(GROUP_LINK);
     return GroupHelper.getIDFromLink(link.getAttribute("href"));
   }
 
-  public WebElement getClickableLink(){
+  public WebElement getClickableLink() {
     return wrappedElement.findElement(GROUP_LINK);
   }
 

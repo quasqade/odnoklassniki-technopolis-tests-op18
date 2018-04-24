@@ -1,30 +1,25 @@
 package tests;
 
-import core.Page404;
 import core.groups.GroupHelper;
 import core.groups.main.GroupMainPage;
 import core.groups.settings.main.GroupPrivacy;
 import core.groups.settings.main.GroupSettingsPage;
-import core.groups.settings.rights.JoinNotificationFrequency;
-import core.groups.settings.rights.RightsSettingsPage;
 import core.login.SessionPage;
 import core.user.UserMainPage;
 import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 /**
  * Проверяется присоединение к закрытой группе путем заявки
  */
 public class SecretGroupVisibilityTest extends TestBase {
 
-  private final TestBot USER_ACCOUNT_MEMBER = BotProvider.requestBot(this);
   private static final String GROUP_NAME = getRandomId();
-  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
   private static String groupId;
+  private final TestBot USER_ACCOUNT_MEMBER = BotProvider.requestBot(this);
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {

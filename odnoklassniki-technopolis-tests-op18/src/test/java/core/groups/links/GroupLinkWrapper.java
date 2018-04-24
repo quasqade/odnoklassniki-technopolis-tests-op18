@@ -13,16 +13,17 @@ public class GroupLinkWrapper {
 
   private WebElement wrappedElement;
 
-  public GroupLinkWrapper(WebElement wrappedElement){
+  public GroupLinkWrapper(WebElement wrappedElement) {
     this.wrappedElement = wrappedElement;
   }
 
 
   /**
    * Возвращает идентификатор обернутой группы
+   *
    * @return строка с айди
    */
-  public String getGroupId(){
+  public String getGroupId() {
     WebElement groupLink = wrappedElement.findElement(GROUP_LINK);
     String href = groupLink.getAttribute("href");
     return GroupHelper.getIDFromLink(href);

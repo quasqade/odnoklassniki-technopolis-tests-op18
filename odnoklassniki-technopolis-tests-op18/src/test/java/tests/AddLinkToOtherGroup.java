@@ -1,10 +1,10 @@
 package tests;
 
 import core.groups.GroupHelper;
-import core.login.SessionPage;
 import core.groups.links.AddLinkOverlay;
 import core.groups.links.GroupLinksPage;
 import core.groups.main.GroupMainPage;
+import core.login.SessionPage;
 import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
@@ -15,8 +15,8 @@ public class AddLinkToOtherGroup extends TestBase {
 
   private static final String PAGE_NAME_1 = getRandomId();
   private static final String PAGE_NAME_2 = getRandomId();
-  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
   private static String firstGroupId, secondGroupId;
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {
@@ -35,16 +35,20 @@ public class AddLinkToOtherGroup extends TestBase {
     int linkCount = gmp.getLinkCountFromOtherSections();
     GroupLinksPage glp = gmp.goToLinks();
     AddLinkOverlay alo = glp.addLink();
-    Assert.assertFalse(alo.getSelectionStateByGroupId(secondGroupId), "Вторая группа уже добавлена как ссылка");
+    Assert.assertFalse(alo.getSelectionStateByGroupId(secondGroupId),
+        "Вторая группа уже добавлена как ссылка");
     alo.selectByGroupId(secondGroupId);
-    Assert.assertTrue(alo.getSelectionStateByGroupId(secondGroupId), "Не удалось выбрать вторую группу для добавления");
+    Assert.assertTrue(alo.getSelectionStateByGroupId(secondGroupId),
+        "Не удалось выбрать вторую группу для добавления");
     glp = alo.confirmAndClose();
-    Assert.assertTrue(glp.isGroupCardPresent(secondGroupId), "Добавленная ссылка отсутствует в списке");
+    Assert.assertTrue(glp.isGroupCardPresent(secondGroupId),
+        "Добавленная ссылка отсутствует в списке");
     gmp = glp.returnToGroupPage();
-    Assert.assertEquals(gmp.getLinkCountFromOtherSections(), linkCount+1, "Счетчик ссылок в разделе Ещё не увеличивается");
+    Assert.assertEquals(gmp.getLinkCountFromOtherSections(), linkCount + 1,
+        "Счетчик ссылок в разделе Ещё не увеличивается");
     gmp = gmp.collectAndGoToFriendlyGroup(secondGroupId);
     Assert.assertEquals(gmp.getGroupId(), secondGroupId, "Переход по ссылке ведет не в ту группу");
 
 
   }
-  }
+}

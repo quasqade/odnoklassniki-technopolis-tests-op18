@@ -1,8 +1,8 @@
 package core.user;
 
 import core.PageBase;
-import core.user.feed.FeedPostListTransformer;
 import core.user.feed.AbstractFeedPost;
+import core.user.feed.FeedPostListTransformer;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -14,32 +14,35 @@ public class AddLinkWrapper {
 
   private WebElement wrappedElement;
 
-  public AddLinkWrapper(WebElement wrappedElement){
-    this.wrappedElement=wrappedElement;
+  public AddLinkWrapper(WebElement wrappedElement) {
+    this.wrappedElement = wrappedElement;
   }
 
   /**
    * Возвращает кликабельный элемент, клик на который меняет состояние выбора
+   *
    * @return элемент
    */
-  public WebElement getClickableHook(){
+  public WebElement getClickableHook() {
     return wrappedElement.findElement(HOVER_HOOK);
   }
 
   /**
    * Возвращает ID группы
+   *
    * @return строка с айди
    */
-  public String getGroupId(){
+  public String getGroupId() {
     WebElement selection = wrappedElement.findElement(SELECTION);
     return selection.getAttribute("value");
   }
 
   /**
    * Возвращает состояние выбора группы
+   *
    * @return true - выбрана, false - нет
    */
-  public boolean isSelected(){
+  public boolean isSelected() {
     WebElement hook = wrappedElement.findElement(HOVER_HOOK);
     return hook.getAttribute("class").contains("ifSelected");
   }
