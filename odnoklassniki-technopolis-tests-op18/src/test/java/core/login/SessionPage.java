@@ -6,6 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SessionPage extends PageBase {
+  private static final By LOGIN_FIELD = By.id("field_email");
+  private static final By PASSWORD_FIELD = By.id("field_password");
+  private static final By LOGIN_BUTTON = By.xpath(".//input[contains(@data-l,'sign_in')]");
 
   /**
    * Представляет страницу логина
@@ -15,7 +18,7 @@ public class SessionPage extends PageBase {
   }
 
   protected void check() {
-
+  waitForVisibility(LOGIN_BUTTON, "Не удалось загрузить страницу логина");
   }
 
   /**
@@ -24,8 +27,8 @@ public class SessionPage extends PageBase {
    * @param testBot параметры входа
    */
   public void loginAuth(TestBot testBot) {
-    type(testBot.getLogin(), By.id("field_email"));
-    type(testBot.getPassword(), By.id("field_password"));
-    click(By.xpath(".//input[contains(@data-l,'sign_in')]"));
+    type(testBot.getLogin(), LOGIN_FIELD);
+    type(testBot.getPassword(), PASSWORD_FIELD);
+    click(LOGIN_BUTTON);
   }
 }

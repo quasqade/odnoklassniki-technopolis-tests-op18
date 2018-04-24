@@ -15,20 +15,23 @@ public class UserGroupsPage extends PageBase {
       .xpath("//select[contains(@id, 'pageMixedCategory')]");
   private static final By CATEGORY_PUBLIC_PAGE = By.xpath(".//*[contains(@data-l,'PAGE')]");
   private static final By CATEGORY_PUBLIC_GROUP = By.xpath(".//*[contains(@data-l, 'INTEREST')]");
+  private static final By CREATE_GROUP_TOOLBAR = By.xpath(".//*[contains(@href,'st.layer.cmd=PopLayerCreateAltGroup')]");
+  private static final By CONFIRM_GROUP_CREATE = By.id("hook_FormButton_button_create");
+  private static final By GROUP_NAME = By.id("field_name");
 
   public UserGroupsPage(WebDriver driver) {
     super(driver);
   }
 
   protected void check() {
-    //TODO
+    waitForVisibility(CREATE_GROUP_TOOLBAR, "Не удалось загрузить страницу групп пользователя");
   }
 
   /**
    * Подтверждает создание группы в попапе
    */
   public void confirmGroupCreation() {
-    click(By.id("hook_FormButton_button_create"));
+    click(CONFIRM_GROUP_CREATE);
   }
 
   /**
@@ -37,7 +40,7 @@ public class UserGroupsPage extends PageBase {
    * @param name имя группы
    */
   public void inputGroupName(String name) {
-    type(name, By.id("field_name"));
+    type(name, GROUP_NAME);
   }
 
   /**
@@ -69,7 +72,7 @@ public class UserGroupsPage extends PageBase {
    * Открывает попап создания группы в левом навбаре
    */
   public void createGroupByToolbar() {
-    click(By.xpath(".//*[contains(@href,'st.layer.cmd=PopLayerCreateAltGroup')]"));
+    click(CREATE_GROUP_TOOLBAR);
   }
 
 }

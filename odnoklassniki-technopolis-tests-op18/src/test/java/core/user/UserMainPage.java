@@ -17,17 +17,18 @@ public class UserMainPage extends PageBase {
   private static final By FEED_CATEGORY_GROUPS = By
       .xpath("//*[contains(@data-l, 'feedTargetFilterId,205')]");
   private static final By FEED = By.xpath("//*[@class='feed-w']");
+  private static final By NAV_TOOLBAR_GROUPS = By.xpath(".//*[contains(@hrefattrs,'NavMenu_User_AltGroups')]");
+  private static final By NAV_TOOLBAR = By.xpath("//*[contains(@class, 'nav-side')]");
+  private static final By FEED_GROUPS_TAB = By.xpath("//*[contains(@class, 'stub-group')]");
   private List<AbstractFeedPost> feedPosts;
 
 
   public UserMainPage(WebDriver driver) {
     super(driver);
-    new WebDriverWait(driver, 10).until(ExpectedConditions
-        .visibilityOfElementLocated(By.xpath("//*[contains(@class, 'nav-side')]")));
   }
 
   protected void check() {
-
+    waitForVisibility(NAV_TOOLBAR, "Не удалось загрузить страницу пользователя");
   }
 
 
@@ -35,7 +36,7 @@ public class UserMainPage extends PageBase {
    * Открывает страницу "Группы" в левом навбаре
    */
   public UserGroupsPage openGroupsByToolbar() {
-    click(By.xpath(".//*[contains(@hrefattrs,'NavMenu_User_AltGroups')]"));
+    click(NAV_TOOLBAR_GROUPS);
     return new UserGroupsPage(driver);
   }
 
@@ -44,8 +45,7 @@ public class UserMainPage extends PageBase {
    */
   public void openGroupsFeedCategory() {
     click(FEED_CATEGORY_GROUPS);
-    new WebDriverWait(driver, 10).until(ExpectedConditions
-        .visibilityOfElementLocated(By.xpath("//*[contains(@class, 'stub-group')]")));
+    waitForVisibility(FEED_CATEGORY_GROUPS, "Не удалось открыть вкладку Группы в ленте");
   }
 
   /**
