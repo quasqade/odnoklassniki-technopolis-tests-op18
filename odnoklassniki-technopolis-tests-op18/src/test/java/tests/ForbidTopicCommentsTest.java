@@ -7,6 +7,7 @@ import core.groups.topics.CommentPostingOverlay;
 import core.groups.topics.GroupTopicsPage;
 import core.groups.main.GroupMainPage;
 import core.groups.topics.GroupTopicWrapper;
+import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +20,9 @@ import org.testng.Assert;
  */
 public class ForbidTopicCommentsTest extends TestBase {
 
-  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot80", "QA18testbot");
+  private final TestBot USER_ACCOUNT_MEMBER = BotProvider.requestBot(this);
   private static final String GROUP_NAME = getRandomId();
-  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot81", "QA18testbot");
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
   private static final String TOPIC_TEXT = "Тест запрета комментариев";
   private static final String COMMENT_TEXT = "Тестовый комментарий";
 

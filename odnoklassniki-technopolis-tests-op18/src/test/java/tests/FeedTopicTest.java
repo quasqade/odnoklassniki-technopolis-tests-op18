@@ -5,6 +5,7 @@ import core.login.SessionPage;
 import core.user.UserMainPage;
 import core.groups.main.GroupMainPage;
 import core.user.feed.AbstractFeedPost;
+import model.BotProvider;
 import model.TestBot;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,7 +18,7 @@ public class FeedTopicTest extends TestBase {
 
   private static final String GROUP_NAME = getRandomId();
   private static final String TOPIC_TEXT = "Тест доставки ленты";
-  private static final TestBot USER_ACCOUNT = new TestBot("QA18testbot78", "QA18testbot");
+  private final TestBot USER_ACCOUNT = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {

@@ -9,6 +9,7 @@ import core.groups.settings.rights.JoinNotificationFrequency;
 import core.groups.settings.rights.RightsSettingsPage;
 import core.login.SessionPage;
 import core.user.UserMainPage;
+import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,9 +21,9 @@ import org.testng.Assert;
  */
 public class SecretGroupVisibilityTest extends TestBase {
 
-  private static final TestBot USER_ACCOUNT_MEMBER = new TestBot("QA18testbot80", "QA18testbot");
+  private final TestBot USER_ACCOUNT_MEMBER = BotProvider.requestBot(this);
   private static final String GROUP_NAME = getRandomId();
-  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot81", "QA18testbot");
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
   private static String groupId;
 
   @Before

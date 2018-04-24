@@ -6,6 +6,7 @@ import core.groups.settings.main.GroupSettingsPage;
 import core.groups.settings.rights.MenuOfGoodsPopUp;
 import core.groups.settings.rights.RightsSettingsPage;
 import core.login.SessionPage;
+import model.BotProvider;
 import model.TestBot;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 public class AddMenuGoodsToGroupTest extends TestBase {
   private static final String GROUP_NAME = getRandomId();
-  private static final TestBot USER_ACCOUNT = new TestBot("QA18testbot80", "QA18testbot");
+  private final TestBot USER_ACCOUNT = BotProvider.requestBot(this);
   private static String groupId;
 
   @Before

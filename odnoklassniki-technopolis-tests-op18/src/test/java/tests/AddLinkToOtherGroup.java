@@ -5,6 +5,7 @@ import core.login.SessionPage;
 import core.groups.links.AddLinkOverlay;
 import core.groups.links.GroupLinksPage;
 import core.groups.main.GroupMainPage;
+import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class AddLinkToOtherGroup extends TestBase {
 
   private static final String PAGE_NAME_1 = getRandomId();
   private static final String PAGE_NAME_2 = getRandomId();
-  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot80", "QA18testbot");
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
   private static String firstGroupId, secondGroupId;
 
   @Before

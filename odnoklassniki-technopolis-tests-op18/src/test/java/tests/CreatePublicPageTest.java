@@ -8,6 +8,7 @@ import core.groups.settings.main.GroupSettingsPage;
 import core.groups.settings.main.GroupType;
 import core.groups.settings.rights.RightsSettingsPage;
 import core.groups.settings.rights.ShowPhotosInFeedOption;
+import model.BotProvider;
 import model.TestBot;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ import org.testng.Assert;
 public class CreatePublicPageTest extends TestBase {
 
   private static final String PAGE_NAME = "Тестовая страница";
-  private static final TestBot USER_ACCOUNT_ADMIN = new TestBot("QA18testbot78", "QA18testbot");
+  private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {
