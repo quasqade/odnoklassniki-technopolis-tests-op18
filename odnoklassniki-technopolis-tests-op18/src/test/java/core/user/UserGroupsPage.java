@@ -89,13 +89,15 @@ public class UserGroupsPage extends PageBase {
   public void deleteAllCreatedGroups() {
     goToModerateGroups();
     List<GroupCardModerateWrapper>  listCards = GroupCardListTransformer.collectGroupCardModerate(driver);
-    for (GroupCardModerateWrapper card : listCards){
-      String groupUrl = "https://ok.ru/group/" + card.getGroupId();
-      driver.navigate().to(groupUrl);
-      GroupMainPage groupMainPage = new GroupMainPage(driver);
-      groupMainPage.clickDeleteGroup();
-      groupMainPage.clickConfirmDeleteGroup();
-      goToModerateGroups();
+    while(listCards.size()!=0) {
+        String groupUrl = "https://ok.ru/group/" + listCards.get(0).getGroupId();
+        driver.navigate().to(groupUrl);
+        GroupMainPage groupMainPage = new GroupMainPage(driver);
+        groupMainPage.clickDeleteGroup();
+        groupMainPage.clickConfirmDeleteGroup();
+        goToModerateGroups();
+      listCards = GroupCardListTransformer.collectGroupCardModerate(driver);
+      }
     }
   }
-}
+
