@@ -1,11 +1,12 @@
 package core.groups.main;
 
-import core.MenuOfGoodsGroupPage;
+import core.groups.MenuOfGoodsGroupPage;
 import core.PageBase;
 import core.groups.GroupHelper;
 import core.groups.links.GroupLinksPage;
 import core.groups.settings.main.GroupSettingsPage;
 import core.groups.topics.GroupTopicsPage;
+import core.user.UserGroupsPage;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -325,6 +326,19 @@ public class GroupMainPage extends PageBase {
     }
     Assert.fail("Попытка перехода по ссылке на группу, которой нет в ссылках");
     return null;
+  }
+
+  /**
+   * Открывает выпадающее меню для удаления группы и кликает на поле "Удалить"
+   */
+
+  public void clickDeleteGroup(){
+    click(By.xpath(".//*[@data-popup-active-class = 'u-menu_li_ul__show']"));
+    click(By.xpath(".//a[contains(@hrefattrs,'PopLayerRemoveAltGroup')]"));
+  }
+
+  public void clickConfirmDeleteGroup(){
+    click(By.id("hook_FormButton_button_delete"));
   }
 
 }

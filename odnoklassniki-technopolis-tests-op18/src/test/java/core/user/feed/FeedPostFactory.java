@@ -22,9 +22,7 @@ public class FeedPostFactory {
     } else if (element.findElements(POST_AUTHOR_GROUP).size() != 0) {
       feedPostWrapped = new FeedPostGroup(element);
     }
-    if (feedPostWrapped == null) {
-      Assert.fail("Unidentified feed post type");
-    }
+    Assert.assertNull(feedPostWrapped,"Unidentified feed post type");
     return feedPostWrapped;
   }
 }

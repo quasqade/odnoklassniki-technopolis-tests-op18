@@ -15,14 +15,14 @@ public class AddLinkToOtherGroup extends TestBase {
 
   private static final String PAGE_NAME_1 = getRandomId();
   private static final String PAGE_NAME_2 = getRandomId();
-  private static String firstGroupId, secondGroupId;
+  private static String secondGroupId;
   private final TestBot USER_ACCOUNT_ADMIN = BotProvider.requestBot(this);
 
   @Before
   public void preconditions() {
     new SessionPage(driver).loginAuth(USER_ACCOUNT_ADMIN);
     GroupMainPage gmp = GroupHelper.createPublicPage(driver, PAGE_NAME_1);
-    firstGroupId = gmp.getGroupId();
+    String firstGroupId = gmp.getGroupId();
     gmp.returnToUserPage();
     gmp = GroupHelper.createPublicPage(driver, PAGE_NAME_2);
     secondGroupId = gmp.getGroupId();
@@ -48,7 +48,6 @@ public class AddLinkToOtherGroup extends TestBase {
         "Счетчик ссылок в разделе Ещё не увеличивается");
     gmp = gmp.collectAndGoToFriendlyGroup(secondGroupId);
     Assert.assertEquals(gmp.getGroupId(), secondGroupId, "Переход по ссылке ведет не в ту группу");
-
 
   }
 }

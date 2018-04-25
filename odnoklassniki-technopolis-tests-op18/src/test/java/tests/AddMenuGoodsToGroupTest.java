@@ -6,8 +6,10 @@ import core.groups.settings.main.GroupSettingsPage;
 import core.groups.settings.rights.MenuOfGoodsPopUp;
 import core.groups.settings.rights.RightsSettingsPage;
 import core.login.SessionPage;
+import core.user.UserGroupsPage;
 import model.BotProvider;
 import model.TestBot;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,4 +43,9 @@ public class AddMenuGoodsToGroupTest extends TestBase {
     groupMainPage.clickToGroupGoods();
   }
 
+  @After
+  public void clearBot(){
+    UserGroupsPage userGroupsPage = goToUserGroupsPage();
+    userGroupsPage.deleteAllCreatedGroups();
+  }
 }

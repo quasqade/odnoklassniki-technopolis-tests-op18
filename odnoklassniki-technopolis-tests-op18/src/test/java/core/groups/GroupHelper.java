@@ -6,6 +6,7 @@ import core.user.UserGroupsPage;
 import core.user.UserMainPage;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import tests.TestBase;
 
 /**
  * Содержит некоторые полезные методы для автоматизации действий, которые не тестируются в каждом
@@ -27,7 +28,6 @@ public class GroupHelper {
     userGroupsPage.inputGroupName(name);
     userGroupsPage.selectCategoryComputers();
     userGroupsPage.confirmGroupCreation();
-
     return new GroupMainPage(driver);
   }
 
@@ -47,4 +47,5 @@ public class GroupHelper {
     Assert.fail("Не удалось извлечь ID группы из ссылки: " + url);
     return null;
   }
+
 }

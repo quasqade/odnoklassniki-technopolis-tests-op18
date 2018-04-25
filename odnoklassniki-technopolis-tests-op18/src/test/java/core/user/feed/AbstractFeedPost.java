@@ -10,7 +10,6 @@ public abstract class AbstractFeedPost {
 
   private static final By POST_TEXT = By.xpath("//*[contains(@class, 'textWrap')]");
 
-
   protected final WebElement rootElement;
 
   protected AbstractFeedPost(WebElement rootElement) {
@@ -62,9 +61,7 @@ public abstract class AbstractFeedPost {
   /**
    * Открыть комменты на посте
    */
-  public void openComments() {
-
-  }
+  public void openComments() {}
 
   //TODO заменить на промисы где будут
 

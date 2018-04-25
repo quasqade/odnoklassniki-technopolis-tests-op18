@@ -1,7 +1,9 @@
 package core.user;
 
 import core.PageBase;
+import core.groups.main.GroupMainPage;
 import core.groups.settings.main.GroupType;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -18,6 +20,7 @@ public class UserGroupsPage extends PageBase {
   private static final By CREATE_GROUP_TOOLBAR = By.xpath(".//*[contains(@href,'st.layer.cmd=PopLayerCreateAltGroup')]");
   private static final By CONFIRM_GROUP_CREATE = By.id("hook_FormButton_button_create");
   private static final By GROUP_NAME = By.id("field_name");
+  public static final By MODERATE_GROUPS = By.xpath(".//a[contains(@hrefattrs,'MODERATED_BY_USER')]");
 
   public UserGroupsPage(WebDriver driver) {
     super(driver);
@@ -75,4 +78,24 @@ public class UserGroupsPage extends PageBase {
     click(CREATE_GROUP_TOOLBAR);
   }
 
+  /**
+   * Открывает модерируемые группы
+   */
+  public void goToModerateGroups() {
+    click(MODERATE_GROUPS);
+  }
+
+
+  public void deleteAllCreatedGroups() {
+    goToModerateGroups();
+    List<GroupCardModerateWrapper>  listCards = GroupCardListTransformer.collectGroupCardModerate(driver);
+    for (GroupCardModerateWrapper card : listCards){
+      String groupUrl = "https://ok.ru/group/" + card.getGroupId();
+      driver.navigate().to(groupUrl);
+      GroupMainPage groupMainPage = new GroupMainPage(driver);
+      groupMainPage.clickDeleteGroup();
+      groupMainPage.clickConfirmDeleteGroup();
+      goToModerateGroups();
+    }
+  }
 }

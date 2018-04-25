@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.fail;
 
 import core.groups.GoToGroupPromise;
+import core.user.UserGroupsPage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -18,7 +19,6 @@ public abstract class TestBase {
   protected WebDriver driver;
   private List<WebDriver> drivers = new ArrayList<>();
   private StringBuffer verificationErrors = new StringBuffer();
-  private String rememberedUrl;
 
   protected static String getRandomId() {
     return UUID.randomUUID().toString().replaceAll("-", "");
@@ -82,6 +82,14 @@ public abstract class TestBase {
     String groupUrl = "https://ok.ru/group/" + groupId;
     driver.navigate().to(groupUrl);
     return new GoToGroupPromise(driver);
+  }
+
+  /**
+   * Переходит на страницу с группами пользователя
+   */
+  public UserGroupsPage goToUserGroupsPage() {
+    driver.navigate().to(baseUrl + "groups/");
+    return new UserGroupsPage(driver);
   }
 
   /**

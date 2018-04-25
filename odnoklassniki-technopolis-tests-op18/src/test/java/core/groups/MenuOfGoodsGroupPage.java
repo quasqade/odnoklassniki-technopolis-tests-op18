@@ -1,5 +1,6 @@
-package core;
+package core.groups;
 
+import core.PageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
